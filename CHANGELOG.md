@@ -1,6 +1,20 @@
 # Changelog
 
-Status: early development (v0.0.3). Interfaces, commands, and packaging may change before the first stable release.
+Status: early development (v0.0.4). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.0.4
+
+### Added or Changed
+- Extended `aes256-java/AesGcmEngine.java` for Unit 01 / Bolt 1.2 with byte-array AES-GCM APIs:
+  - `byte[] encrypt(byte[] plaintext, char[] passphrase)`
+  - `byte[] decrypt(byte[] envelope, char[] passphrase)`
+- Implemented binary envelope policy `salt(16) || iv(12) || ciphertext || tag(16)` using `AES/GCM/NoPadding`, random salt/IV generation per encryption call, and authenticated decryption via GCM tag validation.
+- Added input validation for null/short envelope cases and preserved passphrase-wiping behavior on validation failure paths.
+- Updated `README.md` version markers from `v0.0.3` to `v0.0.4` and refreshed feature/usage/roadmap text to reflect BOLT-1.2 completion.
+- Added `docs/version-0.0.4-docs.md` with detailed version notes, test evidence summary, and next-step guidance.
+
+### For Deletion
+- None from this task context (no tracked build artifacts were produced for this update).
 
 ## v0.0.3
 
