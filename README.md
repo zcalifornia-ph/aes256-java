@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.0.2
+    Version: v0.0.3
     <br />
-    Status: early development (scaffolding and design in progress).
+    Status: early development (Unit 01 / Bolt 1.1 complete: PBKDF2 key-derivation baseline landed).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -76,6 +76,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 
 ### Features
 
+- PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, Bolt 1.1).
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -99,7 +100,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: early development (v0.0.2). Interfaces and command shapes may change before the first stable release.
+Status: early development (v0.0.3). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -121,7 +122,12 @@ javac -version
    cd aes256-java
    ```
 2. Review the project layout and planned entry points once sources land under the project root.
-3. Build and run instructions will be added as the CLI and library surfaces stabilize. Track updates in [CHANGELOG.md](CHANGELOG.md).
+3. Compile the current crypto-engine baseline:
+   ```sh
+   cd aes256-java
+   javac AesGcmEngine.java
+   ```
+4. Full CLI and end-to-end encrypt/decrypt flows land in upcoming Bolts. Track updates in [CHANGELOG.md](CHANGELOG.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,11 +136,11 @@ javac -version
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-The project exposes two intended usage modes. Concrete command and API signatures will be documented here as the implementation lands.
+The project exposes two intended usage modes. Concrete command and API signatures are being introduced incrementally as Bolts land.
 
 ### CLI Mode
 
-Intended shape:
+Planned shape:
 
 ```text
 aes256-java encrypt --text  "hello"        --password "..."
@@ -144,13 +150,13 @@ aes256-java decrypt --file  path/to/input  --password "..." --out path/to/output
 
 ### Library Mode
 
-Intended shape:
+Current baseline (`v0.0.3`):
 
 ```java
-// Placeholder; final package and class names will be finalized during implementation.
-Aes256 cipher = new Aes256(password);
-byte[] ciphertext = cipher.encrypt(plaintext);
-byte[] plaintext  = cipher.decrypt(ciphertext);
+// Current implemented primitive in aes256-java/AesGcmEngine.java:
+// PBKDF2WithHmacSHA256, 210000 iterations, 16-byte salt, 256-bit key.
+AesGcmEngine engine = new AesGcmEngine();
+// Encryption/decryption APIs arrive in subsequent Bolts.
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -176,7 +182,7 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] v0.0.x - Project scaffolding, governance docs, and core OOP skeleton.
+- [ ] v0.0.x - Project scaffolding, governance docs, and core OOP skeleton (BOLT-1.1 PBKDF2 baseline complete).
 - [ ] v0.1.x - Plaintext encryption and decryption implementation with unit tests.
 - [ ] v0.2.x - File encryption and decryption implementation with integration tests.
 - [ ] v0.3.x - CLI entry point, argument parsing, and usability polish.

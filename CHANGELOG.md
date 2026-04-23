@@ -1,6 +1,22 @@
 # Changelog
 
-Status: early development (v0.0.2). Interfaces, commands, and packaging may change before the first stable release.
+Status: early development (v0.0.3). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.0.3
+
+### Added or Changed
+- Added `aes256-java/AesGcmEngine.java` implementing the Unit 01 / Bolt 1.1 PBKDF2 key-derivation baseline:
+  - `PBKDF2WithHmacSHA256`
+  - `210000` iterations
+  - `16`-byte salt validation
+  - `256`-bit AES key derivation
+  - passphrase and temporary key-material wiping in method-finalization path
+- Updated `README.md` version marker from `v0.0.2` to `v0.0.3`.
+- Updated `README.md` status/quick-start/library sections to reflect the current implemented baseline (`AesGcmEngine`) and near-term scope boundaries.
+- Added `docs/version-0.0.3-docs.md` with detailed release notes and validation evidence context.
+
+### For Deletion
+- None from this task context (no tracked build artifacts were produced for this update).
 
 ## v0.0.2
 
