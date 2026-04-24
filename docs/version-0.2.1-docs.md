@@ -1,27 +1,27 @@
 # Version 0.2.1 Documentation
 
 ## Title
-Unit 03 / Bolt 3.1: Interactive CLI Menu Scaffolding and Help/About Routing
+PHASE 03 / MILESTONE 3.1: Interactive CLI Menu Scaffolding and Help/About Routing
 
 ## Quick Diagnostic Read
 
-`v0.2.1` is a code-and-docs milestone that completes Unit-03 Bolt-3.1 by converting `Main` from a minimal selftest hook into a stable CLI shell.
+`v0.2.1` is a code-and-docs milestone that completes PHASE-03 MILESTONE-3.1 by converting `Main` from a minimal selftest hook into a stable CLI shell.
 
 This version adds:
 
 - command dispatch for `--help`, `--selftest`, and `--selftest-large`,
 - a resilient interactive menu loop with deterministic option behavior,
-- updated root docs reflecting the new CLI baseline and next-bolt boundary.
+- updated root docs reflecting the new CLI baseline and next-milestone boundary.
 
 ## One-Sentence Objective
 
-Ship a stable, documented CLI scaffold that preserves selftest behavior and prepares cleanly for Bolt-3.2 encrypt/decrypt action wiring.
+Ship a stable, documented CLI scaffold that preserves selftest behavior and prepares cleanly for MILESTONE-3.2 encrypt/decrypt action wiring.
 
 ## Scope and Versioning
 
 - Previous documented version: `v0.2.0`
 - Current documented version: `v0.2.1`
-- Release type: pre-alpha patch milestone for Unit-03 Bolt-3.1 implementation
+- Release type: pre-alpha patch milestone for PHASE-03 MILESTONE-3.1 implementation
 
 ## File-Level Change Summary
 
@@ -35,13 +35,13 @@ Ship a stable, documented CLI scaffold that preserves selftest behavior and prep
   - keep deterministic options `1`..`6` and `0`,
   - route `5` to `SelfTest`,
   - route `6` to About output,
-  - keep `1`..`4` as explicit staged placeholders for Bolt-3.2,
+  - keep `1`..`4` as explicit staged placeholders for MILESTONE-3.2,
   - exit cleanly on EOF and user quit.
 
 2. `README.md`
 
 - Bumped visible version/status references from `v0.2.0` to `v0.2.1`.
-- Updated feature list to include Unit-03 menu scaffolding capabilities.
+- Updated feature list to include PHASE-03 menu scaffolding capabilities.
 - Updated CLI usage section with `--help` and option `6` behavior.
 - Updated roadmap to mark `v0.2.1` complete and track `v0.2.2` as the next CLI wiring milestone.
 
@@ -75,8 +75,8 @@ Validation executed for this version scope:
 
 ## Traceability and Artifact Scope Notes
 
-- Build-task artifacts for Unit-03 were updated under `aes256-java/ai-dlc-docs/` during implementation, including design, ADR, traceability, and requirements updates.
-- Those paths are intentionally ignored by this repository’s `.gitignore`, so commit scope for `commit-p.task` includes only tracked files in the logical public/documentation surface plus source code changes.
+- build artifacts for PHASE-03 were updated under `internal planning notes` during implementation, including design, ADR, traceability, and requirements updates.
+- Those paths are intentionally ignored by this repository’s `.gitignore`, so commit scope for `commit-and-push step` includes only tracked files in the logical public/documentation surface plus source code changes.
 
 ## Deletion Assessment
 
@@ -85,10 +85,12 @@ Build artifacts detected and recorded as deletion candidates in changelog:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted in this workflow.
+Per project policy, no files were deleted in this release cycle.
 
 ## Next-Step Recommendations
 
-1. Execute Unit-03 / Bolt-3.2 to wire options `1`..`4` to `TextCipher`/`FileCipher` with friendly error mapping.
+1. Execute PHASE-03 / MILESTONE-3.2 to wire options `1`..`4` to `TextCipher`/`FileCipher` with friendly error mapping.
 2. Preserve current selftest/help/about behavior while adding encrypt/decrypt handlers.
-3. Keep versioned docs updates synchronized with each Bolt completion to maintain release traceability.
+3. Keep versioned docs updates synchronized with each milestone completion to maintain release traceability.
+
+

@@ -5,11 +5,11 @@ Documentation Reconciliation and Public Version Bump to 0.2.0
 
 ## Quick Diagnostic Read
 
-`v0.2.0` is a documentation-focused milestone that reconciles public docs with current code reality after Unit-02 selftest integration.
+`v0.2.0` is a documentation-focused milestone that reconciles public docs with current code reality after PHASE-02 selftest integration.
 
 This update keeps implementation behavior unchanged and focuses on:
 
-- docs/task alignment of root docs,
+- documentation alignment of root docs,
 - public version bump from `v0.1.3` to `v0.2.0`,
 - cleanup of changelog deletion notes to avoid exposing ignored-path details.
 
@@ -55,7 +55,7 @@ Validation re-run for docs fidelity:
 - `java Main --selftest` passed with `SELFTEST SUMMARY passed=6 failed=0`.
 - Menu-path selftest invocation (`5`, then `0`) passed with `selftest exit code=0`.
 
-## docs.task Reconciliation Notes
+## docs Reconciliation Notes
 
 - `docs/` was reviewed and remains consistent with current visible project state.
 - No local learning artifacts were present in that workspace.
@@ -65,10 +65,12 @@ Validation re-run for docs fidelity:
 ## Deletion Assessment
 
 - Local Java compile outputs are still generated during validation.
-- These were documented generically in changelog deletion notes and not deleted in this workflow.
+- These were documented generically in changelog deletion notes and not deleted in this release cycle.
 
 ## Next-Step Recommendations
 
-1. Execute Unit-03 Bolts to implement full interactive encrypt/decrypt menu behavior and friendly error mapping.
+1. Execute PHASE-03 milestones to implement full interactive encrypt/decrypt menu behavior and friendly error mapping.
 2. Keep selftest output and route behavior stable while expanding `Main`.
 3. Continue versioned docs entries per milestone to preserve change traceability.
+
+

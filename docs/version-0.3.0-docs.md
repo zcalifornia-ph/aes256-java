@@ -1,7 +1,7 @@
 # Version 0.3.0 Documentation
 
 ## Title
-Documentation Reconciliation and Version Alignment (`docs.task`)
+Documentation Reconciliation and Version Alignment (`docs`)
 
 ## Quick Diagnostic Read
 
@@ -15,7 +15,7 @@ This version:
 
 ## One-Sentence Objective
 
-Ship a clean documentation baseline that matches current project behavior while preparing for Unit-04 packaging work.
+Ship a clean documentation baseline that matches current project behavior while preparing for PHASE-04 packaging work.
 
 ## Scope and Versioning
 
@@ -34,8 +34,8 @@ Ship a clean documentation baseline that matches current project behavior while 
 2. `CHANGELOG.md`
 
 - Bumped status line to `v0.3.0`.
-- Added `v0.3.0` entry summarizing docs-task reconciliation scope and validation.
-- Sanitized `v0.2.2` wording to remove explicit references to internal ignored workflow paths.
+- Added `v0.3.0` entry summarizing documentation reconciliation scope and validation.
+- Sanitized `v0.2.2` wording to remove explicit references to internal ignored internal process paths.
 
 3. `docs/version-0.3.0-docs.md`
 
@@ -47,7 +47,7 @@ Ship a clean documentation baseline that matches current project behavior while 
 
 ## Documentation Reconciliation Notes
 
-- The active requirements baseline indicates Unit-03 Bolts are complete and Unit-04 is the next construction phase.
+- The active requirements baseline indicates PHASE-03 milestones are complete and PHASE-04 is the next construction phase.
 - Root documentation now reflects this state without exposing ignored internal workflow directories.
 - No `learn/` directory is currently present in this workspace, so no learning-artifact reconciliation changes were required.
 
@@ -63,9 +63,11 @@ Build-artifact deletion candidates remain unchanged:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted.
+Per project policy, no files were deleted.
 
 ## Next-Step Recommendations
 
-1. Execute Unit-04 / Bolt-4.1 to finalize Javadoc and OOP concept map synchronization.
-2. Keep root docs and release docs synchronized when Unit-04 packaging artifacts land.
+1. Execute PHASE-04 / MILESTONE-4.1 to finalize Javadoc and OOP concept map synchronization.
+2. Keep root docs and release docs synchronized when PHASE-04 packaging artifacts land.
+
+

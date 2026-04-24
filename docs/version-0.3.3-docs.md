@@ -16,13 +16,13 @@ This version:
 
 ## One-Sentence Objective
 
-Ship a flat-directory submission package that graders can extract, compile, run, and verify without repository-only tooling or hidden workflow files.
+Ship a flat-directory submission package that graders can extract, compile, run, and verify without repository-only tooling or hidden internal files.
 
 ## Scope and Versioning
 
 - Previous documented version: `v0.3.2`
 - Current documented version: `v0.3.3`
-- Release type: pre-alpha patch milestone for Unit-04 / Bolt-4.2 submission packaging and grading evidence
+- Release type: pre-alpha patch milestone for PHASE-04 / MILESTONE-4.2 submission packaging and grading evidence
 
 ## File-Level Change Summary
 
@@ -75,7 +75,7 @@ Ship a flat-directory submission package that graders can extract, compile, run,
 ## Packaging Notes
 
 - The zip was built from an allowlisted staging directory rather than by zipping the live `aes256-java/` tree.
-- That choice prevented local `.class` artifacts and ignored workflow material from entering the archive.
+- That choice prevented local `.class` artifacts and ignored internal material from entering the archive.
 - The archive is intentionally flat so graders can run:
   - `javac *.java`
   - `java Main`
@@ -102,9 +102,9 @@ Validation executed for this version scope:
 
 ## Traceability and Scope Notes
 
-- This release closes Unit-04 / Bolt-4.2 in the internal AI-DLC requirements baseline.
+- This release closes PHASE-04 / MILESTONE-4.2 in the internal planning requirements baseline.
 - No runtime crypto parameters or public Java API contracts changed in this version.
-- Ignored AI-DLC internal artifacts were updated for traceability but intentionally remain outside the tracked commit per repo rules.
+- Ignored internal planning artifacts were updated for traceability but intentionally remain outside the tracked commit per repo rules.
 
 ## Deletion Assessment
 
@@ -113,9 +113,11 @@ Build artifacts listed as deletion candidates in `CHANGELOG.md`:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted in this workflow.
+Per project policy, no files were deleted in this release cycle.
 
 ## Next-Step Recommendations
 
 1. Reconcile any future repo-root documentation changes against the submission-local `aes256-java/README.md` so the grader and repo narratives stay aligned.
 2. If the project evolves beyond the PE submission, use the next milestone for public-release cleanup and API stabilization rather than changing the submission archive layout casually.
+
+

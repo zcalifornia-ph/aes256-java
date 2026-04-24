@@ -1,11 +1,11 @@
 # Version 0.2.2 Documentation
 
 ## Title
-Unit 03 / Bolt 3.2: Interactive Encrypt/Decrypt Wiring and Friendly Error Mapping
+PHASE 03 / MILESTONE 3.2: Interactive Encrypt/Decrypt Wiring and Friendly Error Mapping
 
 ## Quick Diagnostic Read
 
-`v0.2.2` completes Unit-03 Bolt-3.2 by replacing menu placeholders with working crypto actions in `Main`.
+`v0.2.2` completes PHASE-03 MILESTONE-3.2 by replacing menu placeholders with working crypto actions in `Main`.
 
 This version adds:
 
@@ -21,7 +21,7 @@ Ship a functional interactive CLI that can encrypt/decrypt text and files with s
 
 - Previous documented version: `v0.2.1`
 - Current documented version: `v0.2.2`
-- Release type: pre-alpha patch milestone for Unit-03 Bolt-3.2 implementation
+- Release type: pre-alpha patch milestone for PHASE-03 MILESTONE-3.2 implementation
 
 ## File-Level Change Summary
 
@@ -76,7 +76,7 @@ Validation executed for this version scope:
 
 ## Traceability and Artifact Scope Notes
 
-- Unit-03 design/traceability artifacts were also updated under `aes256-java/ai-dlc-docs/` during build-task execution.
+- PHASE-03 design/traceability artifacts were also updated under `internal planning notes` during build execution.
 - Those paths are intentionally ignored by repository `.gitignore`; commit scope here includes only tracked public docs and source files.
 
 ## Deletion Assessment
@@ -86,10 +86,12 @@ Build artifacts noted as deletion candidates in `CHANGELOG.md`:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted in this workflow.
+Per project policy, no files were deleted in this release cycle.
 
 ## Next-Step Recommendations
 
-1. Execute Unit-04 / Bolt-4.1 to complete Javadoc and OOP concept map synchronization artifacts.
-2. Keep CLI message text stable while adding final packaging checks in Unit-04.
-3. Maintain versioned `docs/version-*.md` companions for each bolt-completion release.
+1. Execute PHASE-04 / MILESTONE-4.1 to complete Javadoc and OOP concept map synchronization artifacts.
+2. Keep CLI message text stable while adding final packaging checks in PHASE-04.
+3. Maintain versioned `docs/version-*.md` companions for each milestone-completion release.
+
+

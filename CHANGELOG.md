@@ -1,6 +1,40 @@
 # Changelog
 
-Status: stable (v1.0.0). The documented CLI entrypoints and library surface define the supported `1.x` baseline.
+Status: stable (v1.0.1). The documented CLI entrypoints and library surface define the supported `1.x` baseline.
+
+## v1.0.1
+
+### Added or Changed
+- Updated public documentation language to remove internal workflow terminology from tracked docs and learning artifacts.
+- Updated root release metadata in `README.md` to `v1.0.1` and added a roadmap entry for this documentation-only release.
+- Reconciled root and versioned docs wording across:
+  - `CHANGELOG.md`
+  - `README.md`
+  - `docs/version-0.0.3-docs.md`
+  - `docs/version-0.0.4-docs.md`
+  - `docs/version-0.1.0-docs.md`
+  - `docs/version-0.1.1-docs.md`
+  - `docs/version-0.1.2-docs.md`
+  - `docs/version-0.1.3-docs.md`
+  - `docs/version-0.2.0-docs.md`
+  - `docs/version-0.2.1-docs.md`
+  - `docs/version-0.2.2-docs.md`
+  - `docs/version-0.3.0-docs.md`
+  - `docs/version-0.3.1-docs.md`
+  - `docs/version-0.3.2-docs.md`
+  - `docs/version-0.3.3-docs.md`
+  - `docs/version-1.0.0-docs.md`
+- Normalized the newly added `learn/explain-aes256-java-*.md` guides to remove internal task-system references while preserving the file-level teaching content.
+- Added `docs/version-1.0.1-docs.md` with detailed scope, validation, and release notes for this update.
+
+### Validation Notes
+- Documentation scope scan passed with no remaining matches for the internal task/workflow markers targeted in this release.
+- No source-code or runtime behavior changes were introduced in this release.
+
+### For Deletion
+- Generated Java class artifacts from local runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v1.0.0
 
@@ -25,7 +59,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.3.3
 
 ### Added or Changed
-- Completed Unit-04 / BOLT-4.2 submission packaging for the flat-directory PE04 deliverable:
+- Completed PHASE-04 / MILESTONE-4.2 submission packaging for the flat-directory PE04 deliverable:
   - added `aes256-java/README.md` as the grader-facing submission guide,
   - added `aes256-java/rubric-self-check.md` with row-by-row rubric mapping sourced from the local course rubric baseline,
   - built `aes256-java/Adeva_California_Rizal_PE04.zip`,
@@ -85,7 +119,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.3.1
 
 ### Added or Changed
-- Completed Unit-04 / BOLT-4.1 public release surfaces for OOP documentation clarity:
+- Completed PHASE-04 / MILESTONE-4.1 public release surfaces for OOP documentation clarity:
   - synchronized the OOP concept map between `README.md` and the top-of-file `Main.java` comment block,
   - added missing public-member Javadocs for wrapper descriptor overrides in `aes256-java/TextCipher.java` and `aes256-java/FileCipher.java`.
 - Updated `README.md` version/status markers from `v0.3.0` to `v0.3.1`.
@@ -105,9 +139,9 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.3.0
 
 ### Added or Changed
-- Reconciled root documentation via `docs.task` using the current project requirements baseline for consistency checks.
+- Reconciled root documentation via `docs` using the current project requirements baseline for consistency checks.
 - Bumped public version markers from `v0.2.2` to `v0.3.0` in `README.md`.
-- Sanitized root changelog wording to avoid exposing internal or ignored workflow artifact paths.
+- Sanitized root changelog wording to avoid exposing internal or ignored internal artifact paths.
 - Added `docs/version-0.3.0-docs.md` with expanded release-context and documentation reconciliation notes.
 
 ### Validation Notes
@@ -122,11 +156,11 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.2.2
 
 ### Added or Changed
-- Completed Unit 03 / BOLT-3.2 CLI action wiring in `aes256-java/Main.java`:
+- Completed PHASE 03 / MILESTONE-3.2 CLI action wiring in `aes256-java/Main.java`:
   - wired menu options `1`..`4` to `TextCipher` and `FileCipher`,
   - added friendly exception mapping for wrong passphrase/corruption (`AEADBadTagException`), missing files, and overwrite refusal,
   - added passphrase prompting strategy with masked `System.console().readPassword()` when available and explicit fallback warning in non-console runs.
-- Updated internal Unit-03 lifecycle artifacts and requirements state to mark BOLT-3.2 complete.
+- Updated internal PHASE-03 lifecycle artifacts and requirements state to mark MILESTONE-3.2 complete.
 - Updated `README.md` to `v0.2.2` with wired CLI usage and sample transcript.
 
 ### Validation Notes
@@ -147,7 +181,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.2.1
 
 ### Added or Changed
-- Completed Unit 03 / BOLT-3.1 menu scaffolding in `aes256-java/Main.java`:
+- Completed PHASE 03 / MILESTONE-3.1 menu scaffolding in `aes256-java/Main.java`:
   - added OOP concept map header comment in `Main.java` per requirements contract,
   - added `--help` handling with educational warning output,
   - kept `--selftest` and `--selftest-large` routing with process exit-code behavior,
@@ -171,7 +205,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.2.0
 
 ### Added or Changed
-- Reconciled root documentation via `docs.task` against current codebase behavior and public docs constraints.
+- Reconciled root documentation via `docs` against current codebase behavior and public docs constraints.
 - Bumped public versioning references from `v0.1.3` to `v0.2.0` in `README.md` and release docs.
 - Added `docs/version-0.2.0-docs.md` with the milestone summary, validation evidence, and follow-up scope.
 - Preserved contributor policy docs (`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`) unchanged because no governance-policy updates were required.
@@ -188,7 +222,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.1.3
 
 ### Added or Changed
-- Added Unit 02 / Bolt 2.3 in-program assertion artifacts:
+- Added PHASE 02 / MILESTONE 2.3 in-program assertion artifacts:
   - `aes256-java/SelfTest.java`
   - `aes256-java/Main.java`
 - Implemented `SelfTest` pass/fail scenario runner with process-friendly exit-code policy (`0` all pass, non-zero otherwise).
@@ -211,12 +245,12 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.1.2
 
 ### Added or Changed
-- Implemented Unit 02 / Bolt 2.2 behavior bodies in:
+- Implemented PHASE 02 / MILESTONE 2.2 behavior bodies in:
   - `aes256-java/CryptoOperation.java`
   - `aes256-java/TextCipher.java`
   - `aes256-java/FileCipher.java`
 - Added secure consume-and-clear passphrase lifecycle in `CryptoOperation` for per-operation hygiene.
-- Implemented `TextCipher` Base64 wrappers for text encrypt/decrypt over the Unit-01 byte-array engine APIs.
+- Implemented `TextCipher` Base64 wrappers for text encrypt/decrypt over the PHASE-01 byte-array engine APIs.
 - Implemented `FileCipher` stream wrappers for file encrypt/decrypt with default naming policy (`.enc` / strip `.enc` else `.dec`) and overwrite refusal checks.
 - Updated `README.md` version/status/features/usage/roadmap sections to reflect `v0.1.2`.
 - Added `docs/version-0.1.2-docs.md` with detailed implementation and validation evidence.
@@ -225,7 +259,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 - `javac *.java` from `aes256-java/` passed.
 - Library-mode acceptance harness passed:
   - `ACCEPTANCE-SUMMARY TEST-01/02/03/04/05/06 PASS`
-- Updated Unit-02 concept-map implementation lint passed:
+- Updated PHASE-02 concept-map implementation lint passed:
   - `PASS TEST-12 concept-map-implementation-lint`
 
 ### For Deletion
@@ -234,12 +268,12 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.1.1
 
 ### Added or Changed
-- Added Unit 02 / Bolt 2.1 OOP abstraction skeleton classes:
+- Added PHASE 02 / MILESTONE 2.1 OOP abstraction skeleton classes:
   - `aes256-java/CryptoOperation.java`
   - `aes256-java/TextCipher.java`
   - `aes256-java/FileCipher.java`
 - Updated `README.md` version/status/features/roadmap sections to reflect `v0.1.1` and the completed hierarchy scaffold milestone.
-- Added `docs/version-0.1.1-docs.md` with implementation rationale, validation evidence, and follow-up scope for Bolt 2.2.
+- Added `docs/version-0.1.1-docs.md` with implementation rationale, validation evidence, and follow-up scope for MILESTONE 2.2.
 
 ### Validation Notes
 - `javac *.java` from `aes256-java/` passed.
@@ -251,7 +285,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 ## v0.1.0
 
 ### Added or Changed
-- Extended `aes256-java/AesGcmEngine.java` with Unit 01 / Bolt 1.3 stream APIs:
+- Extended `aes256-java/AesGcmEngine.java` with PHASE 01 / MILESTONE 1.3 stream APIs:
   - `void encrypt(InputStream in, OutputStream out, char[] passphrase)`
   - `void decrypt(InputStream in, OutputStream out, char[] passphrase)`
 - Implemented bounded-memory chunked stream framing for stream paths:
@@ -260,33 +294,33 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
   - plaintext chunk size: 64 KiB per record
 - Updated `README.md` version/status/roadmap sections to reflect the `v0.1.0` pre-alpha milestone and current API surface.
 - Added `docs/version-0.1.0-docs.md` with release notes and validation evidence.
-- Reconciled historical wording in `CHANGELOG.md` to avoid exposing ignored/internal workflow paths in public-facing documentation.
+- Reconciled historical wording in `CHANGELOG.md` to avoid exposing ignored/internal process paths in public-facing documentation.
 
 ### Validation Notes
 - `TEST-03` (stream round-trip 128 MiB) passed.
 - `TEST-07` (stream bounded-memory 1 GiB target under `-Xmx512m`) passed.
 
 ### For Deletion
-- None from this task context (no tracked build artifacts were produced for this update).
+- None from this change scope (no tracked build artifacts were produced for this update).
 
 ## v0.0.4
 
 ### Added or Changed
-- Extended `aes256-java/AesGcmEngine.java` for Unit 01 / Bolt 1.2 with byte-array AES-GCM APIs:
+- Extended `aes256-java/AesGcmEngine.java` for PHASE 01 / MILESTONE 1.2 with byte-array AES-GCM APIs:
   - `byte[] encrypt(byte[] plaintext, char[] passphrase)`
   - `byte[] decrypt(byte[] envelope, char[] passphrase)`
 - Implemented binary envelope policy `salt(16) || iv(12) || ciphertext || tag(16)` using `AES/GCM/NoPadding`, random salt/IV generation per encryption call, and authenticated decryption via GCM tag validation.
 - Added input validation for null/short envelope cases and preserved passphrase-wiping behavior on validation failure paths.
-- Updated `README.md` version markers from `v0.0.3` to `v0.0.4` and refreshed feature/usage/roadmap text to reflect BOLT-1.2 completion.
+- Updated `README.md` version markers from `v0.0.3` to `v0.0.4` and refreshed feature/usage/roadmap text to reflect MILESTONE-1.2 completion.
 - Added `docs/version-0.0.4-docs.md` with detailed version notes, test evidence summary, and next-step guidance.
 
 ### For Deletion
-- None from this task context (no tracked build artifacts were produced for this update).
+- None from this change scope (no tracked build artifacts were produced for this update).
 
 ## v0.0.3
 
 ### Added or Changed
-- Added `aes256-java/AesGcmEngine.java` implementing the Unit 01 / Bolt 1.1 PBKDF2 key-derivation baseline:
+- Added `aes256-java/AesGcmEngine.java` implementing the PHASE 01 / MILESTONE 1.1 PBKDF2 key-derivation baseline:
   - `PBKDF2WithHmacSHA256`
   - `210000` iterations
   - `16`-byte salt validation
@@ -297,7 +331,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 - Added `docs/version-0.0.3-docs.md` with detailed release notes and validation evidence context.
 
 ### For Deletion
-- None from this task context (no tracked build artifacts were produced for this update).
+- None from this change scope (no tracked build artifacts were produced for this update).
 
 ## v0.0.2
 
@@ -310,7 +344,7 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 - Bumped `README.md` version markers from `v0.0.1` to `v0.0.2`.
 
 ### For Deletion
-- None from this task context (documentation and licensing updates only; no build artifacts generated by this update).
+- None from this change scope (documentation and licensing updates only; no build artifacts generated by this update).
 
 ## v0.0.1
 
@@ -319,7 +353,9 @@ Status: stable (v1.0.0). The documented CLI entrypoints and library surface defi
 - Added root `README.md` describing the project scope, dual CLI/library usage model, prerequisites, roadmap, and contributor entry points.
 - Added `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md` adapted from the repository templates with project-specific contacts.
 - Added this `CHANGELOG.md` to track changes from the initial version onward.
-- Updated `.gitignore` to exclude internal workflow/tooling artifacts and to add conservative Java build/IDE/OS ignore patterns appropriate for a zero-dependency Java CLI and library project.
+- Updated `.gitignore` to exclude internal tooling artifacts and to add conservative Java build/IDE/OS ignore patterns appropriate for a zero-dependency Java CLI and library project.
 
 ### For Deletion
-- None from this task context (documentation and configuration updates only; no new build artifacts generated by this update).
+- None from this change scope (documentation and configuration updates only; no new build artifacts generated by this update).
+
+
