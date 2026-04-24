@@ -1,6 +1,72 @@
 # Changelog
 
-Status: pre-alpha (v0.2.0). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.3.0). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.3.0
+
+### Added or Changed
+- Reconciled root documentation via `docs.task` using the current project requirements baseline for consistency checks.
+- Bumped public version markers from `v0.2.2` to `v0.3.0` in `README.md`.
+- Sanitized root changelog wording to avoid exposing internal or ignored workflow artifact paths.
+- Added `docs/version-0.3.0-docs.md` with expanded release-context and documentation reconciliation notes.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
+
+## v0.2.2
+
+### Added or Changed
+- Completed Unit 03 / BOLT-3.2 CLI action wiring in `aes256-java/Main.java`:
+  - wired menu options `1`..`4` to `TextCipher` and `FileCipher`,
+  - added friendly exception mapping for wrong passphrase/corruption (`AEADBadTagException`), missing files, and overwrite refusal,
+  - added passphrase prompting strategy with masked `System.console().readPassword()` when available and explicit fallback warning in non-console runs.
+- Updated internal Unit-03 lifecycle artifacts and requirements state to mark BOLT-3.2 complete.
+- Updated `README.md` to `v0.2.2` with wired CLI usage and sample transcript.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Scripted menu evidence passed for:
+  - text encrypt/decrypt success path,
+  - friendly wrong-passphrase and tamper error mapping (`TEST-04`, `TEST-05`),
+  - overwrite refusal (`TEST-06`),
+  - passphrase fallback warning path when console is unavailable (`TEST-08`),
+  - file encrypt/decrypt success plus friendly wrong-passphrase/corruption mapping.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
+
+## v0.2.1
+
+### Added or Changed
+- Completed Unit 03 / BOLT-3.1 menu scaffolding in `aes256-java/Main.java`:
+  - added OOP concept map header comment in `Main.java` per requirements contract,
+  - added `--help` handling with educational warning output,
+  - kept `--selftest` and `--selftest-large` routing with process exit-code behavior,
+  - expanded interactive menu handling with explicit option placeholders (`1`..`4`), SelfTest route (`5`), About output (`6`), and graceful EOF handling.
+- Updated `README.md` version/status/features/usage/roadmap sections from `v0.2.0` to `v0.2.1`.
+- Added `docs/version-0.2.1-docs.md` with full implementation notes, validation evidence, and follow-up scope.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`; no policy changes were required for this version.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --help` passed and printed usage/options text plus educational warning.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Menu-path selftest invocation (`5`, then `0`) passed and reported `selftest exit code=0`.
+- Menu-path quit invocation (`0`) exited cleanly with `bye`.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.2.0
 
