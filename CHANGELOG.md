@@ -1,6 +1,34 @@
 # Changelog
 
-Status: pre-alpha (v0.2.1). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.2.2). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.2.2
+
+### Added or Changed
+- Completed Unit 03 / BOLT-3.2 CLI action wiring in `aes256-java/Main.java`:
+  - wired menu options `1`..`4` to `TextCipher` and `FileCipher`,
+  - added friendly exception mapping for wrong passphrase/corruption (`AEADBadTagException`), missing files, and overwrite refusal,
+  - added passphrase prompting strategy with masked `System.console().readPassword()` when available and explicit fallback warning in non-console runs.
+- Added Unit 03 BOLT-3.2 artifacts:
+  - `aes256-java/ai-dlc-docs/design-artifacts/unit-03/adr/bolt-3-2-adr.md`
+  - `aes256-java/ai-dlc-docs/traceability/unit-03/bolt-3-2-traceability.md`
+- Updated Unit-03 design compatibility artifacts and `ai-dlc-docs/requirements/REQUIREMENTS.md` for BOLT-3.2 completion and next-task progression.
+- Updated `README.md` to `v0.2.2` with wired CLI usage and sample transcript.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Scripted menu evidence passed for:
+  - text encrypt/decrypt success path,
+  - friendly wrong-passphrase and tamper error mapping (`TEST-04`, `TEST-05`),
+  - overwrite refusal (`TEST-06`),
+  - passphrase fallback warning path when console is unavailable (`TEST-08`),
+  - file encrypt/decrypt success plus friendly wrong-passphrase/corruption mapping.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.2.1
 
