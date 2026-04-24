@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.1.0
+    Version: v0.2.0
     <br />
-    Status: pre-alpha (core AES-GCM APIs landed; Unit 01 stream validation now includes a passing 1 GiB bounded-heap acceptance run).
+    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and in-program selftest entry hooks are landed; interactive encrypt/decrypt CLI actions remain in progress).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -79,6 +79,8 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, Bolt 1.1).
 - Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.2).
 - Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.3).
+- OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolts 2.1 and 2.2).
+- In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (Bolt 2.3).
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -102,7 +104,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.1.0). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.2.0). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -124,12 +126,16 @@ javac -version
    cd aes256-java
    ```
 2. Review the project layout and planned entry points once sources land under the project root.
-3. Compile the current crypto-engine baseline:
+3. Compile the current baseline:
    ```sh
    cd aes256-java
-   javac AesGcmEngine.java
+   javac *.java
    ```
-4. Full interactive CLI, selftest harness, and submission-packaging flows land in upcoming Bolts. Track updates in [CHANGELOG.md](CHANGELOG.md).
+4. Full interactive encrypt/decrypt CLI wiring and submission-packaging flows land in upcoming Bolts. Track updates in [CHANGELOG.md](CHANGELOG.md).
+5. Run the in-program assertions:
+   ```sh
+   java Main --selftest
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,7 +148,16 @@ The project exposes two intended usage modes. Concrete command and API signature
 
 ### CLI Mode
 
-Planned shape:
+Current available entry points:
+
+```text
+java Main --selftest
+java Main --selftest-large
+java Main
+  -> option 5 runs SelfTest
+```
+
+Planned interactive encrypt/decrypt shape:
 
 ```text
 aes256-java encrypt --text  "hello"        --password "..."
@@ -152,7 +167,7 @@ aes256-java decrypt --file  path/to/input  --password "..." --out path/to/output
 
 ### Library Mode
 
-Current baseline (`v0.1.0`):
+Current baseline (`v0.2.0`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -161,12 +176,24 @@ Current baseline (`v0.1.0`):
 //   salt(16) || iv(12) || ciphertext || tag(16)
 // - stream encrypt/decrypt overloads for InputStream/OutputStream paths using:
 //   salt(16) || streamIv(12) || record(length(4) || ciphertext || tag(16))*
+// Unit-02 OOP wrappers are implemented:
+// - CryptoOperation abstract base with consume-and-clear passphrase flow
+// - TextCipher: Base64 text envelope encrypt/decrypt wrappers
+// - FileCipher: stream file encrypt/decrypt wrappers with .enc/.dec naming policy
 AesGcmEngine engine = new AesGcmEngine();
 char[] passphrase = "secret".toCharArray();
 byte[] envelope = engine.encrypt(plaintext, passphrase);
 byte[] recovered = engine.decrypt(envelope, "secret".toCharArray());
 engine.encrypt(inputStream, encryptedOutputStream, passphrase);
 engine.decrypt(encryptedInputStream, decryptedOutputStream, "secret".toCharArray());
+TextCipher textCipher = new TextCipher(engine, "secret".toCharArray());
+String ciphertext = textCipher.encrypt("hello");
+textCipher.setPassphrase("secret".toCharArray()); // reset because passphrase is consumed per operation
+String recoveredText = textCipher.decrypt(ciphertext);
+String label = textCipher.banner();
+
+// In-program assertions:
+int selfTestExit = SelfTest.runDefault(System.out); // 0 when all checks pass
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -193,8 +220,11 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 ## Roadmap
 
 - [x] v0.1.0 - Core crypto engine baseline (KDF + byte-array + stream API surfaces).
-- [ ] v0.1.x - OOP abstraction layer and selftest harness integration.
-- [ ] v0.2.x - CLI entry point, argument parsing, and usability polish.
+- [x] v0.1.1 - OOP abstraction hierarchy skeleton (Unit 02 / Bolt 2.1).
+- [x] v0.1.2 - OOP behavior wrappers implemented (Unit 02 / Bolt 2.2).
+- [x] v0.1.3 - In-program selftest integration with dual entry paths (Unit 02 / Bolt 2.3).
+- [x] v0.2.0 - CLI entrypoint with selftest flags/menu routing (`Main` + `SelfTest`).
+- [ ] v0.2.x - Full interactive encrypt/decrypt CLI wiring and friendly error mapping.
 - [ ] v0.3.x - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
 

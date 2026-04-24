@@ -1,6 +1,86 @@
 # Changelog
 
-Status: pre-alpha (v0.1.0). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.2.0). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.2.0
+
+### Added or Changed
+- Reconciled root documentation via `docs.task` against current codebase behavior and public docs constraints.
+- Bumped public versioning references from `v0.1.3` to `v0.2.0` in `README.md` and release docs.
+- Added `docs/version-0.2.0-docs.md` with the milestone summary, validation evidence, and follow-up scope.
+- Preserved contributor policy docs (`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`) unchanged because no governance-policy updates were required.
+- Sanitized deletion notes to avoid exposing ignored internal artifact paths.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Menu-path selftest invocation (`5`, then `0`) passed and reported `selftest exit code=0`.
+
+### For Deletion
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
+
+## v0.1.3
+
+### Added or Changed
+- Added Unit 02 / Bolt 2.3 in-program assertion artifacts:
+  - `aes256-java/SelfTest.java`
+  - `aes256-java/Main.java`
+- Implemented `SelfTest` pass/fail scenario runner with process-friendly exit-code policy (`0` all pass, non-zero otherwise).
+- Implemented dual selftest invocation paths required by `TEST-10`:
+  - `java Main --selftest`
+  - menu option `5` from interactive `Main`.
+- Updated `README.md` version/status/features/usage/roadmap sections to reflect `v0.1.3`.
+- Added `docs/version-0.1.3-docs.md` with detailed implementation and validation evidence.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Menu-path selftest invocation (`5`, then `0`) passed and reported `selftest exit code=0`.
+- Optional large selftest path passed:
+  - `java Main --selftest-large` with `PASS TEST-03 round-trip 128MiB`.
+
+### For Deletion
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
+
+## v0.1.2
+
+### Added or Changed
+- Implemented Unit 02 / Bolt 2.2 behavior bodies in:
+  - `aes256-java/CryptoOperation.java`
+  - `aes256-java/TextCipher.java`
+  - `aes256-java/FileCipher.java`
+- Added secure consume-and-clear passphrase lifecycle in `CryptoOperation` for per-operation hygiene.
+- Implemented `TextCipher` Base64 wrappers for text encrypt/decrypt over the Unit-01 byte-array engine APIs.
+- Implemented `FileCipher` stream wrappers for file encrypt/decrypt with default naming policy (`.enc` / strip `.enc` else `.dec`) and overwrite refusal checks.
+- Updated `README.md` version/status/features/usage/roadmap sections to reflect `v0.1.2`.
+- Added `docs/version-0.1.2-docs.md` with detailed implementation and validation evidence.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- Library-mode acceptance harness passed:
+  - `ACCEPTANCE-SUMMARY TEST-01/02/03/04/05/06 PASS`
+- Updated Unit-02 concept-map implementation lint passed:
+  - `PASS TEST-12 concept-map-implementation-lint`
+
+### For Deletion
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
+
+## v0.1.1
+
+### Added or Changed
+- Added Unit 02 / Bolt 2.1 OOP abstraction skeleton classes:
+  - `aes256-java/CryptoOperation.java`
+  - `aes256-java/TextCipher.java`
+  - `aes256-java/FileCipher.java`
+- Updated `README.md` version/status/features/roadmap sections to reflect `v0.1.1` and the completed hierarchy scaffold milestone.
+- Added `docs/version-0.1.1-docs.md` with implementation rationale, validation evidence, and follow-up scope for Bolt 2.2.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `TEST-12 concept-map-lint` passed, confirming source anchors for encapsulation, inheritance, method overloading, and method overriding.
+
+### For Deletion
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
 
 ## v0.1.0
 
