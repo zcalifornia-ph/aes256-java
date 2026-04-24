@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.3.1
+    Version: v0.3.2
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, Unit 03 interactive CLI wiring, and Unit 04 / Bolt 4.1 documentation hardening are landed; packaging remains next).
+    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, Unit 03 interactive CLI wiring, Unit 04 / Bolt 4.1 documentation hardening, and the v0.3.2 CLI presentation polish are landed; packaging remains next).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -84,6 +84,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (Bolt 2.3).
 - Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (Unit 03 / Bolt 3.2).
 - Unit 04 / Bolt 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
+- Branded CLI presentation with header/banner output, action-specific screens, return-to-menu prompts, and console-aware output encoding in `Main`.
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -121,7 +122,7 @@ Mirror in source:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.3.1). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.3.2). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -179,29 +180,42 @@ java Main
   -> option 2 decrypts text (friendly wrong-passphrase/corruption mapping)
   -> option 3 encrypts file (<input>.enc)
   -> option 4 decrypts file (strip .enc else .dec)
-  -> option 5 runs SelfTest
-  -> option 6 prints About
+  -> option 5 runs the smoke test suite
+  -> option 6 prints About / credits
 ```
+
+Presentation notes:
+
+- Help, menu, and action screens render a branded header before the active content.
+- When a real console is attached, `Main` clears between menu/action screens; when not attached, it falls back to spacer lines and still keeps the workflow readable.
+- After each action, the CLI pauses on `Press Enter to return to menu...` so the result stays visible before the next clear/menu repaint.
 
 Sample interactive transcript (non-console fallback mode):
 
 ```text
-=== aes256-java ===
-1) Encrypt text
-2) Decrypt text
-3) Encrypt file
-4) Decrypt file
-5) SelfTest
-6) About
-0) Quit
-Select option: 1
+<banner>
+AES-256-GCM LEARNING CLI | TEXT + FILE ENCRYPTION
+==================================================
+[ Menu ]
+
+  1) Encrypt text
+  2) Decrypt text
+  3) Encrypt file
+  4) Decrypt file
+  5) Run Smoke Test
+  6) About
+  0) Quit
+
+Input: 1
 Plaintext: hello
 warning: console is not attached; passphrase input will be visible.
 Passphrase: secret
 ciphertext (Base64):
 <base64-envelope>
 
-Select option: 2
+Press Enter to return to menu...
+
+Input: 2
 Ciphertext (Base64): <base64-envelope>
 warning: console is not attached; passphrase input will be visible.
 Passphrase: wrong
@@ -210,7 +224,7 @@ decrypt text failed: wrong passphrase or corrupted ciphertext.
 
 ### Library Mode
 
-Current baseline (`v0.3.1`):
+Current baseline (`v0.3.2`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -271,7 +285,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.2.2 - Full interactive encrypt/decrypt CLI wiring and friendly error mapping (Unit 03 / Bolt 3.2).
 - [x] v0.3.0 - Documentation reconciliation (`docs.task`) and release metadata alignment.
 - [x] v0.3.1 - Unit 04 / Bolt 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
-- [ ] v0.3.2 - Library packaging guidance, sample projects, and API stabilization.
+- [x] v0.3.2 - CLI presentation polish (bannered screens, clear/return flow, about credits, and console-aware output encoding).
+- [ ] v0.3.3 - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.

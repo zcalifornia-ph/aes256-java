@@ -1,6 +1,31 @@
 # Changelog
 
-Status: pre-alpha (v0.3.1). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.3.2). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.3.2
+
+### Added or Changed
+- Polished `aes256-java/Main.java` interactive CLI presentation:
+  - added a branded header/subtitle shell for help, menu, and action screens,
+  - introduced action-specific screen transitions with return-to-menu pauses,
+  - refreshed menu/about/quit wording for a cleaner interactive flow.
+- Added console-output initialization in `aes256-java/Main.java` so CLI output prefers the attached console charset and falls back to UTF-8 when no console charset is available.
+- Updated `README.md` version/status/features/usage/roadmap sections from `v0.3.1` to `v0.3.2`.
+- Added `docs/version-0.3.2-docs.md` with the full implementation notes, behavioral context, and validation evidence for this release.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`; no policy or process changes were required for this version.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --help` passed and printed the branded CLI header plus usage text.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Scripted menu-path checks passed for:
+  - option `5` smoke-test route plus return-to-menu flow,
+  - option `6` about/credits route plus clean quit path.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.3.1
 
