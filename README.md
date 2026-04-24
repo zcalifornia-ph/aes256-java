@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.1.1
+    Version: v0.1.2
     <br />
-    Status: pre-alpha (core AES-GCM APIs plus Unit 02 Bolt 2.1 OOP abstraction skeleton are landed; behavior implementation continues in Bolt 2.2).
+    Status: pre-alpha (core AES-GCM APIs and Unit 02 Bolt 2.2 OOP behavior wrappers are landed; CLI wiring and selftest integration remain in progress).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -79,7 +79,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, Bolt 1.1).
 - Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.2).
 - Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.3).
-- OOP abstraction hierarchy skeleton (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolt 2.1).
+- OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolts 2.1 and 2.2).
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -103,7 +103,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.1.1). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.1.2). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -153,7 +153,7 @@ aes256-java decrypt --file  path/to/input  --password "..." --out path/to/output
 
 ### Library Mode
 
-Current baseline (`v0.1.1`):
+Current baseline (`v0.1.2`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -162,10 +162,10 @@ Current baseline (`v0.1.1`):
 //   salt(16) || iv(12) || ciphertext || tag(16)
 // - stream encrypt/decrypt overloads for InputStream/OutputStream paths using:
 //   salt(16) || streamIv(12) || record(length(4) || ciphertext || tag(16))*
-// Unit-02 hierarchy scaffolding is also present:
-// - CryptoOperation abstract base
-// - TextCipher and FileCipher concrete subclasses (method bodies for encrypt/decrypt
-//   are intentionally deferred to Bolt 2.2)
+// Unit-02 OOP wrappers are implemented:
+// - CryptoOperation abstract base with consume-and-clear passphrase flow
+// - TextCipher: Base64 text envelope encrypt/decrypt wrappers
+// - FileCipher: stream file encrypt/decrypt wrappers with .enc/.dec naming policy
 AesGcmEngine engine = new AesGcmEngine();
 char[] passphrase = "secret".toCharArray();
 byte[] envelope = engine.encrypt(plaintext, passphrase);
@@ -173,6 +173,9 @@ byte[] recovered = engine.decrypt(envelope, "secret".toCharArray());
 engine.encrypt(inputStream, encryptedOutputStream, passphrase);
 engine.decrypt(encryptedInputStream, decryptedOutputStream, "secret".toCharArray());
 TextCipher textCipher = new TextCipher(engine, "secret".toCharArray());
+String ciphertext = textCipher.encrypt("hello");
+textCipher.setPassphrase("secret".toCharArray()); // reset because passphrase is consumed per operation
+String recoveredText = textCipher.decrypt(ciphertext);
 String label = textCipher.banner();
 ```
 
@@ -201,7 +204,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 
 - [x] v0.1.0 - Core crypto engine baseline (KDF + byte-array + stream API surfaces).
 - [x] v0.1.1 - OOP abstraction hierarchy skeleton (Unit 02 / Bolt 2.1).
-- [ ] v0.1.x - OOP behavior implementation and selftest harness integration.
+- [x] v0.1.2 - OOP behavior wrappers implemented (Unit 02 / Bolt 2.2).
+- [ ] v0.1.x - Selftest harness integration and CLI wiring.
 - [ ] v0.2.x - CLI entry point, argument parsing, and usability polish.
 - [ ] v0.3.x - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.

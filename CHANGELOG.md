@@ -1,6 +1,34 @@
 # Changelog
 
-Status: pre-alpha (v0.1.1). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.1.2). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.1.2
+
+### Added or Changed
+- Implemented Unit 02 / Bolt 2.2 behavior bodies in:
+  - `aes256-java/CryptoOperation.java`
+  - `aes256-java/TextCipher.java`
+  - `aes256-java/FileCipher.java`
+- Added secure consume-and-clear passphrase lifecycle in `CryptoOperation` for per-operation hygiene.
+- Implemented `TextCipher` Base64 wrappers for text encrypt/decrypt over the Unit-01 byte-array engine APIs.
+- Implemented `FileCipher` stream wrappers for file encrypt/decrypt with default naming policy (`.enc` / strip `.enc` else `.dec`) and overwrite refusal checks.
+- Updated `README.md` version/status/features/usage/roadmap sections to reflect `v0.1.2`.
+- Added `docs/version-0.1.2-docs.md` with detailed implementation and validation evidence.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- Library-mode acceptance harness passed:
+  - `ACCEPTANCE-SUMMARY TEST-01/02/03/04/05/06 PASS`
+- Updated Unit-02 concept-map implementation lint passed:
+  - `PASS TEST-12 concept-map-implementation-lint`
+
+### For Deletion
+- `aes256-java/AesGcmEngine.class`
+- `aes256-java/AesGcmEngine$1.class`
+- `aes256-java/AesGcmEngine$2.class`
+- `aes256-java/CryptoOperation.class`
+- `aes256-java/FileCipher.class`
+- `aes256-java/TextCipher.class`
 
 ## v0.1.1
 

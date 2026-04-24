@@ -3,8 +3,8 @@ import java.util.Arrays;
 /**
  * Abstract base type for the Unit-02 OOP abstraction layer.
  *
- * <p>This class is intentionally small in BOLT-2.1. It establishes encapsulation and
- * inheritance seams; behavior-rich cipher bodies are scheduled for BOLT-2.2.
+ * <p>This class establishes encapsulation and inheritance seams for Unit-02 and provides a
+ * passphrase lifecycle that can be consumed and cleared per operation.
  */
 public abstract class CryptoOperation {
 
@@ -49,6 +49,9 @@ public abstract class CryptoOperation {
      * @return copied passphrase characters
      */
     public final char[] getPassphrase() {
+        if (passphrase == null) {
+            throw new IllegalStateException("passphrase has been cleared; setPassphrase before use");
+        }
         return Arrays.copyOf(passphrase, passphrase.length);
     }
 
@@ -71,7 +74,19 @@ public abstract class CryptoOperation {
     public final void clearStoredPassphrase() {
         if (passphrase != null) {
             Arrays.fill(passphrase, '\0');
+            passphrase = null;
         }
+    }
+
+    /**
+     * Returns a one-time passphrase copy for an operation and clears stored state immediately.
+     *
+     * @return copied passphrase characters for one operation
+     */
+    protected final char[] consumePassphrase() {
+        char[] operationPassphrase = getPassphrase();
+        clearStoredPassphrase();
+        return operationPassphrase;
     }
 
     /**
