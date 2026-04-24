@@ -1,7 +1,7 @@
 # Version 0.0.4 Documentation
 
 ## Title
-Unit 01 / Bolt 1.2 Completion: Byte-Array AES-GCM Encrypt/Decrypt (aes256-java)
+PHASE 01 / MILESTONE 1.2 Completion: Byte-Array AES-GCM Encrypt/Decrypt (aes256-java)
 
 ## Quick Diagnostic Read
 
@@ -9,17 +9,17 @@ This version upgrades the crypto baseline from key derivation only to full byte-
 
 - `AesGcmEngine` now supports `encrypt(...)` and `decrypt(...)` APIs.
 - AES-GCM envelope framing is implemented as `salt(16) || iv(12) || ciphertext || tag(16)`.
-- Root project docs now reflect BOLT-1.2 completion and `v0.0.4` status.
+- Root project docs now reflect MILESTONE-1.2 completion and `v0.0.4` status.
 
 ## One-Sentence Objective
 
-Land a verified, JDK-only byte-array AES-256/GCM path that satisfies Unit 01 BOLT-1.2 requirements and unblocks streaming APIs in BOLT-1.3.
+Land a verified, JDK-only byte-array AES-256/GCM path that satisfies PHASE 01 MILESTONE-1.2 requirements and unblocks streaming APIs in MILESTONE-1.3.
 
 ## Why This Version Matters
 
 Before this update:
 
-- the repo had deterministic PBKDF2 key derivation (`BOLT-1.1`) but no encryption/decryption operations,
+- the repo had deterministic PBKDF2 key derivation (`MILESTONE-1.1`) but no encryption/decryption operations,
 - README usage examples were still positioned as pre-encryption baseline.
 
 After this update:
@@ -57,7 +57,7 @@ After this update:
 - Bumped visible version and status to `v0.0.4`.
 - Updated feature list to include byte-array AES-GCM APIs.
 - Updated library-mode example to show current `encrypt/decrypt` baseline usage.
-- Updated roadmap phrasing to reflect BOLT-1.1 + BOLT-1.2 completion in the `v0.0.x` phase.
+- Updated roadmap phrasing to reflect MILESTONE-1.1 + MILESTONE-1.2 completion in the `v0.0.x` phase.
 
 3. `CHANGELOG.md`
 
@@ -79,12 +79,14 @@ No deletion candidates were identified for commit scope.
 
 ## Compatibility and Risk Notes
 
-- Runtime risk: moderate; this introduces first authenticated encryption/decryption path and should keep receiving Bolt-level tests as APIs expand.
-- Scope boundary: stream-based encrypt/decrypt (`InputStream`/`OutputStream`) is still pending BOLT-1.3.
-- Repo hygiene note: AI-DLC artifacts under `aes256-java/ai-dlc-docs/` remain ignored by `.gitignore` and are not included in this tracked commit.
+- Runtime risk: moderate; this introduces first authenticated encryption/decryption path and should keep receiving milestone-level tests as APIs expand.
+- Scope boundary: stream-based encrypt/decrypt (`InputStream`/`OutputStream`) is still pending MILESTONE-1.3.
+- Repo hygiene note: internal planning artifacts under `internal planning notes` remain ignored by `.gitignore` and are not included in this tracked commit.
 
 ## Next-Step Recommendations
 
-1. Execute `build.task` for `UNIT-01` `BOLT-1.3` to add streaming file encryption/decryption.
-2. Add a tracked selftest source file in a future Bolt so acceptance evidence is runnable from repository code without temporary harness creation.
-3. Keep README examples synchronized with each Bolt completion to avoid API/docs drift.
+1. Execute `build` for `PHASE-01` `MILESTONE-1.3` to add streaming file encryption/decryption.
+2. Add a tracked selftest source file in a future milestone so acceptance evidence is runnable from repository code without temporary harness creation.
+3. Keep README examples synchronized with each milestone completion to avoid API/docs drift.
+
+

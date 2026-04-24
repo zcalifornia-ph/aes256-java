@@ -93,7 +93,7 @@ Validation executed for this version scope:
 
 - This version is a public-surface refinement release centered on `Main.java`.
 - No cryptographic algorithm parameters, envelope formats, or wrapper contracts were changed.
-- No hidden workflow files were added to the tracked change set.
+- No hidden internal files were added to the tracked change set.
 
 ## Deletion Assessment
 
@@ -102,9 +102,10 @@ Build artifacts listed as deletion candidates in `CHANGELOG.md`:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted in this workflow.
+Per project policy, no files were deleted in this release cycle.
 
 ## Next-Step Recommendations
 
 1. Execute the next packaging-focused milestone (`v0.3.3`) for archive guidance, sample-project usage, and fresh-extract validation.
 2. Keep future CLI transcript examples synchronized with the actual `Main.java` menu and about/help screens.
+

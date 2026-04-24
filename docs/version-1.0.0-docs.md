@@ -70,7 +70,7 @@ Validation re-run for this version scope:
 
 - No Java source changes were required for this release; the stable bump is based on the already-complete implementation and its acceptance evidence.
 - The supported public surface for `1.x` is the documented `Main` CLI entrypoints, `SelfTest` runner, `AesGcmEngine` encrypt/decrypt overloads, and the `TextCipher` / `FileCipher` wrappers.
-- Public docs no longer enumerate ignored workflow or local note paths.
+- Public docs no longer enumerate ignored internal or local note paths.
 
 ## Deletion Assessment
 
@@ -79,10 +79,11 @@ Build artifacts listed as deletion candidates in `CHANGELOG.md`:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted in this workflow.
+Per project policy, no files were deleted in this release cycle.
 
 ## Next-Step Recommendations
 
 1. Use `v1.0.1` for documentation or security fixes that do not change the public API.
 2. Reserve `v1.1.0` for additive CLI or library features that remain backward compatible.
 3. Cut a new major version only if the documented `1.x` surface changes incompatibly.
+

@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v1.0.0
+    Version: v1.0.1
     <br />
-    Status: stable (v1.0.0). The documented AES-GCM engine, OOP wrappers, interactive CLI, and built-in selftest now define the supported public baseline.
+    Status: Stable Release
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -77,13 +77,13 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 
 ### Features
 
-- PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, Bolt 1.1).
-- Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.2).
-- Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.3).
-- OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolts 2.1 and 2.2).
-- In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (Bolt 2.3).
-- Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (Unit 03 / Bolt 3.2).
-- Unit 04 / Bolt 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
+- PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, MILESTONE 1.1).
+- Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, MILESTONE 1.2).
+- Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, MILESTONE 1.3).
+- OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, milestones 2.1 and 2.2).
+- In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (MILESTONE 2.3).
+- Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (PHASE 03 / MILESTONE 3.2).
+- PHASE 04 / MILESTONE 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
 - Branded CLI presentation with header/banner output, action-specific screens, return-to-menu prompts, and console-aware output encoding in `Main`.
 - PE04 submission packaging outputs under [`aes256-java/`](aes256-java/README.md): flat archive `Adeva_California_Rizal_PE04.zip`, `sha256.txt`, and `rubric-self-check.md`.
 - AES-256 encryption and decryption for plaintext input.
@@ -171,7 +171,7 @@ javac -version
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-The project exposes two intended usage modes. Concrete command and API signatures are being introduced incrementally as Bolts land.
+The project exposes two intended usage modes. Concrete command and API signatures are being introduced incrementally as milestones land.
 
 ### CLI Mode
 
@@ -246,7 +246,7 @@ Stable baseline (`v1.0.0`):
 //   salt(16) || iv(12) || ciphertext || tag(16)
 // - stream encrypt/decrypt overloads for InputStream/OutputStream paths using:
 //   salt(16) || streamIv(12) || record(length(4) || ciphertext || tag(16))*
-// Unit-02 OOP wrappers are implemented:
+// PHASE-02 OOP wrappers are implemented:
 // - CryptoOperation abstract base with consume-and-clear passphrase flow
 // - TextCipher: Base64 text envelope encrypt/decrypt wrappers
 // - FileCipher: stream file encrypt/decrypt wrappers with .enc/.dec naming policy
@@ -292,18 +292,19 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 ## Roadmap
 
 - [x] v0.1.0 - Core crypto engine baseline (KDF + byte-array + stream API surfaces).
-- [x] v0.1.1 - OOP abstraction hierarchy skeleton (Unit 02 / Bolt 2.1).
-- [x] v0.1.2 - OOP behavior wrappers implemented (Unit 02 / Bolt 2.2).
-- [x] v0.1.3 - In-program selftest integration with dual entry paths (Unit 02 / Bolt 2.3).
+- [x] v0.1.1 - OOP abstraction hierarchy skeleton (PHASE 02 / MILESTONE 2.1).
+- [x] v0.1.2 - OOP behavior wrappers implemented (PHASE 02 / MILESTONE 2.2).
+- [x] v0.1.3 - In-program selftest integration with dual entry paths (PHASE 02 / MILESTONE 2.3).
 - [x] v0.2.0 - CLI entrypoint with selftest flags/menu routing (`Main` + `SelfTest`).
-- [x] v0.2.1 - Unit 03 / Bolt 3.1 menu scaffolding (`--help`, About, resilient menu loop, and staged handlers).
-- [x] v0.2.2 - Full interactive encrypt/decrypt CLI wiring and friendly error mapping (Unit 03 / Bolt 3.2).
-- [x] v0.3.0 - Documentation reconciliation (`docs.task`) and release metadata alignment.
-- [x] v0.3.1 - Unit 04 / Bolt 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
+- [x] v0.2.1 - PHASE 03 / MILESTONE 3.1 menu scaffolding (`--help`, About, resilient menu loop, and staged handlers).
+- [x] v0.2.2 - Full interactive encrypt/decrypt CLI wiring and friendly error mapping (PHASE 03 / MILESTONE 3.2).
+- [x] v0.3.0 - Documentation reconciliation (`docs`) and release metadata alignment.
+- [x] v0.3.1 - PHASE 04 / MILESTONE 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
 - [x] v0.3.2 - CLI presentation polish (bannered screens, clear/return flow, about credits, and console-aware output encoding).
 - [x] v0.3.3 - PE04 submission packaging (`Adeva_California_Rizal_PE04.zip`), checksum publication, rubric self-check, and fresh-extract validation.
 - [x] v0.4.0 - Public release cleanup, integration guidance, and API stabilization.
 - [x] v1.0.0 - First stable public release with documented API, acceptance tests, and reconciled governance docs.
+- [x] v1.0.1 - Documentation terminology cleanup across root docs, release notes, and learning guides (no runtime or API changes).
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.
 
@@ -387,3 +388,4 @@ Project Link: [https://github.com/zcalifornia-ph/aes256-java](https://github.com
 [product-screenshot]: repo/images/project_screen.png
 [Java]: https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
 [Java-url]: https://www.java.com/
+

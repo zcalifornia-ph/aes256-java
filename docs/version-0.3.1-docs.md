@@ -1,17 +1,17 @@
 # Version 0.3.1 Documentation
 
 ## Title
-Unit-04 / Bolt-4.1 Public Docs Hardening (Javadoc + OOP Concept Map Sync)
+PHASE-04 / MILESTONE-4.1 Public Docs Hardening (Javadoc + OOP Concept Map Sync)
 
 ## Quick Diagnostic Read
 
-`v0.3.1` is a focused documentation-quality release tied to Unit-04 / Bolt-4.1.
+`v0.3.1` is a focused documentation-quality release tied to PHASE-04 / MILESTONE-4.1.
 
 This version:
 
 - aligns the public OOP concept map between `README.md` and the `Main.java` header,
 - closes public-member Javadoc gaps on OOP wrapper descriptor overrides,
-- keeps release docs/versioning consistent while preparing the next packaging bolt.
+- keeps release docs/versioning consistent while preparing the next packaging milestone.
 
 ## One-Sentence Objective
 
@@ -21,14 +21,14 @@ Ship a cleaner, rubric-aligned public documentation surface for OOP traceability
 
 - Previous documented version: `v0.3.0`
 - Current documented version: `v0.3.1`
-- Release type: pre-alpha patch milestone for Unit-04 / Bolt-4.1 documentation hardening
+- Release type: pre-alpha patch milestone for PHASE-04 / MILESTONE-4.1 documentation hardening
 
 ## File-Level Change Summary
 
 1. `README.md`
 
 - Bumped visible version/status references from `v0.3.0` to `v0.3.1`.
-- Added an explicit feature bullet for Unit-04 / Bolt-4.1 docs hardening.
+- Added an explicit feature bullet for PHASE-04 / MILESTONE-4.1 docs hardening.
 - Finalized the OOP concept-map section so the concept/member anchors match the `Main.java` mirror.
 - Updated roadmap state:
   - marked `v0.3.1` complete,
@@ -77,7 +77,7 @@ Validation executed for this version scope:
 
 ## Traceability and Artifact Scope Notes
 
-- Unit-04 design/traceability artifacts were updated during the bolt build flow under `aes256-java/ai-dlc-docs/`.
+- PHASE-04 design/traceability artifacts were updated during the milestone build flow under `internal planning notes`.
 - That path is intentionally ignored by repository `.gitignore`; this release commit includes only tracked public docs and source files.
 
 ## Deletion Assessment
@@ -87,9 +87,11 @@ Build artifacts listed as deletion candidates in `CHANGELOG.md`:
 - `aes256-java/*.class`
 - `aes256-java/*$*.class`
 
-Per task rules, no files were deleted in this workflow.
+Per project policy, no files were deleted in this release cycle.
 
 ## Next-Step Recommendations
 
-1. Execute Unit-04 / Bolt-4.2 for submission archive build, checksum generation, and fresh-extract validation.
-2. Keep README/changelog/version-doc updates in lockstep with Bolt-4.2 packaging outputs.
+1. Execute PHASE-04 / MILESTONE-4.2 for submission archive build, checksum generation, and fresh-extract validation.
+2. Keep README/changelog/version-doc updates in lockstep with MILESTONE-4.2 packaging outputs.
+
+

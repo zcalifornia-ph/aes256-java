@@ -11,7 +11,7 @@ Pre-Alpha Milestone: Core AES-GCM Engine Surface Expanded to Stream APIs
 - byte-array encrypt/decrypt,
 - stream encrypt/decrypt overloads.
 
-This version also includes a docs reconciliation pass (`docs.task`) to align root docs with current code and remove internal-path leakage from public changelog text.
+This version also includes a docs reconciliation pass (`docs`) to align root docs with current code and remove internal-path leakage from public changelog text.
 
 ## One-Sentence Objective
 
@@ -37,13 +37,13 @@ Promote the project to `v0.1.0` after landing the initial end-to-end core crypto
 
 - Bumped visible version markers and status to `v0.1.0` pre-alpha.
 - Updated feature list and usage examples to include stream API surfaces.
-- Updated roadmap to show `v0.1.0` milestone achieved and Unit 02/OOP work as the next major build target.
+- Updated roadmap to show `v0.1.0` milestone achieved and PHASE 02/OOP work as the next major build target.
 
 3. `CHANGELOG.md`
 
 - Added `v0.1.0` entry describing stream API milestone and validation status.
 - Updated changelog status line to `v0.1.0`.
-- Sanitized an older historical line to avoid enumerating ignored/internal workflow paths.
+- Sanitized an older historical line to avoid enumerating ignored/internal process paths.
 
 ## Validation Notes
 
@@ -52,7 +52,7 @@ Known verification state at this milestone:
 - `TEST-03` (stream round-trip, 128 MiB synthetic payload): `PASS TEST-03 round-trip-128MiB elapsedSeconds=2.462 throughputMiBps=52.00`
 - `TEST-07` (stream 1 GiB bounded-memory target at `-Xmx512m`): `PASS TEST-07 round-trip-1024MiB elapsedSeconds=4.561 throughputMiBps=224.53`
 
-## docs.task Reconciliation Outcomes
+## docs Reconciliation Outcomes
 
 - `README.md` and `CHANGELOG.md` were updated to match current code reality.
 - `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md` were reviewed and left unchanged because no policy/process changes were required for this version bump.
@@ -65,6 +65,8 @@ No deletion candidates were identified.
 
 ## Next-Step Recommendations
 
-1. Proceed to Unit 02 Bolt work (`BOLT-2.1`) for OOP hierarchy design and implementation scaffolding.
+1. Proceed to PHASE 02 milestone work (`MILESTONE-2.1`) for OOP hierarchy design and implementation scaffolding.
 2. Add/commit a reproducible selftest harness to make stream-path evidence easy to rerun from `Main`.
 3. Continue toward CLI wiring and user-facing error mapping for subsequent milestones.
+
+
