@@ -1,6 +1,28 @@
 # Changelog
 
-Status: pre-alpha (v0.1.0). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.1.1). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.1.1
+
+### Added or Changed
+- Added Unit 02 / Bolt 2.1 OOP abstraction skeleton classes:
+  - `aes256-java/CryptoOperation.java`
+  - `aes256-java/TextCipher.java`
+  - `aes256-java/FileCipher.java`
+- Updated `README.md` version/status/features/roadmap sections to reflect `v0.1.1` and the completed hierarchy scaffold milestone.
+- Added `docs/version-0.1.1-docs.md` with implementation rationale, validation evidence, and follow-up scope for Bolt 2.2.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `TEST-12 concept-map-lint` passed, confirming source anchors for encapsulation, inheritance, method overloading, and method overriding.
+
+### For Deletion
+- `aes256-java/AesGcmEngine.class`
+- `aes256-java/AesGcmEngine$1.class`
+- `aes256-java/AesGcmEngine$2.class`
+- `aes256-java/CryptoOperation.class`
+- `aes256-java/FileCipher.class`
+- `aes256-java/TextCipher.class`
 
 ## v0.1.0
 

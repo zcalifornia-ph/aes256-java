@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.1.0
+    Version: v0.1.1
     <br />
-    Status: pre-alpha (core AES-GCM APIs landed; Unit 01 stream validation now includes a passing 1 GiB bounded-heap acceptance run).
+    Status: pre-alpha (core AES-GCM APIs plus Unit 02 Bolt 2.1 OOP abstraction skeleton are landed; behavior implementation continues in Bolt 2.2).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -79,6 +79,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, Bolt 1.1).
 - Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.2).
 - Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.3).
+- OOP abstraction hierarchy skeleton (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolt 2.1).
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -102,7 +103,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.1.0). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.1.1). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -124,12 +125,12 @@ javac -version
    cd aes256-java
    ```
 2. Review the project layout and planned entry points once sources land under the project root.
-3. Compile the current crypto-engine baseline:
+3. Compile the current baseline:
    ```sh
    cd aes256-java
-   javac AesGcmEngine.java
+   javac *.java
    ```
-4. Full interactive CLI, selftest harness, and submission-packaging flows land in upcoming Bolts. Track updates in [CHANGELOG.md](CHANGELOG.md).
+4. Full interactive CLI wiring, selftest harness, and submission-packaging flows land in upcoming Bolts. Track updates in [CHANGELOG.md](CHANGELOG.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -152,7 +153,7 @@ aes256-java decrypt --file  path/to/input  --password "..." --out path/to/output
 
 ### Library Mode
 
-Current baseline (`v0.1.0`):
+Current baseline (`v0.1.1`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -161,12 +162,18 @@ Current baseline (`v0.1.0`):
 //   salt(16) || iv(12) || ciphertext || tag(16)
 // - stream encrypt/decrypt overloads for InputStream/OutputStream paths using:
 //   salt(16) || streamIv(12) || record(length(4) || ciphertext || tag(16))*
+// Unit-02 hierarchy scaffolding is also present:
+// - CryptoOperation abstract base
+// - TextCipher and FileCipher concrete subclasses (method bodies for encrypt/decrypt
+//   are intentionally deferred to Bolt 2.2)
 AesGcmEngine engine = new AesGcmEngine();
 char[] passphrase = "secret".toCharArray();
 byte[] envelope = engine.encrypt(plaintext, passphrase);
 byte[] recovered = engine.decrypt(envelope, "secret".toCharArray());
 engine.encrypt(inputStream, encryptedOutputStream, passphrase);
 engine.decrypt(encryptedInputStream, decryptedOutputStream, "secret".toCharArray());
+TextCipher textCipher = new TextCipher(engine, "secret".toCharArray());
+String label = textCipher.banner();
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -193,7 +200,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 ## Roadmap
 
 - [x] v0.1.0 - Core crypto engine baseline (KDF + byte-array + stream API surfaces).
-- [ ] v0.1.x - OOP abstraction layer and selftest harness integration.
+- [x] v0.1.1 - OOP abstraction hierarchy skeleton (Unit 02 / Bolt 2.1).
+- [ ] v0.1.x - OOP behavior implementation and selftest harness integration.
 - [ ] v0.2.x - CLI entry point, argument parsing, and usability polish.
 - [ ] v0.3.x - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
