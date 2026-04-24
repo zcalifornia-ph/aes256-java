@@ -13,10 +13,8 @@ termination clause for patent litigation described in that license text.
 
 ## Bundled and Referenced License Materials
 
-This repository includes third-party and reference license texts under
-`agent/licenses/`, including the catalog in `agent/licenses/license-manifest.txt`.
-Those files are retained for notice, attribution, compatibility review, and
-workflow-support purposes.
+This repository may also include local reference license materials retained for
+notice, attribution, compatibility review, and workflow-support purposes.
 
 The presence of those license texts does not relicense repository-owned material
 and does not override [LICENSE.txt](LICENSE.txt) except where a specific file or

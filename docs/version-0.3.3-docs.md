@@ -34,7 +34,7 @@ Ship a flat-directory submission package that graders can extract, compile, run,
 
 2. `aes256-java/rubric-self-check.md`
 
-- Added a row-by-row rubric mapping sourced from `oop-notes/rubrics.txt`.
+- Added a row-by-row rubric mapping sourced from the local course rubric baseline.
 - Recorded the packaging and validation evidence that backs the self-assessment.
 
 3. `aes256-java/Adeva_California_Rizal_PE04.zip`

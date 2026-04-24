@@ -1,13 +1,33 @@
 # Changelog
 
-Status: pre-alpha (v0.3.3). Interfaces, commands, and packaging may change before the first stable release.
+Status: stable (v1.0.0). The documented CLI entrypoints and library surface define the supported `1.x` baseline.
+
+## v1.0.0
+
+### Added or Changed
+- Promoted the public documentation set from `v0.3.3` to `v1.0.0` and aligned the visible release/status markers in `README.md`.
+- Documented the supported stable `1.x` baseline for the current CLI entrypoints, `SelfTest` runner, `AesGcmEngine`, `TextCipher`, and `FileCipher` public surfaces.
+- Updated `SECURITY.md` to support the latest stable `1.x` line instead of the older `0.x` pre-release line.
+- Sanitized remaining ignored/internal-path references in `README.md`, `THIRD-PARTY-NOTICES.md`, and historical versioned docs under `docs/`.
+- Added `docs/version-1.0.0-docs.md` with the stable-release reconciliation notes and validation evidence.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.txt`; no policy or license changes were required for this version.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --help` from `aes256-java/` passed.
+- `java Main --selftest` from `aes256-java/` passed with `SELFTEST SUMMARY passed=6 failed=0`.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.3.3
 
 ### Added or Changed
 - Completed Unit-04 / BOLT-4.2 submission packaging for the flat-directory PE04 deliverable:
   - added `aes256-java/README.md` as the grader-facing submission guide,
-  - added `aes256-java/rubric-self-check.md` with row-by-row rubric mapping sourced from `oop-notes/rubrics.txt`,
+  - added `aes256-java/rubric-self-check.md` with row-by-row rubric mapping sourced from the local course rubric baseline,
   - built `aes256-java/Adeva_California_Rizal_PE04.zip`,
   - published `aes256-java/sha256.txt` for the archive checksum.
 - Updated root `README.md` version/status/features/usage/roadmap sections from `v0.3.2` to `v0.3.3`.

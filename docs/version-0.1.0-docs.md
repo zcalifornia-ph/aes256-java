@@ -56,7 +56,7 @@ Known verification state at this milestone:
 
 - `README.md` and `CHANGELOG.md` were updated to match current code reality.
 - `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md` were reviewed and left unchanged because no policy/process changes were required for this version bump.
-- `learn/` directory and root `REQUIREMENTS.md` were not present in this workspace; reconciliation was performed against available root/docs artifacts and current source reality.
+- Local learning artifacts and the private requirements baseline were not present in that workspace; reconciliation was performed against available root/docs artifacts and current source reality.
 
 ## Deletion Assessment
 

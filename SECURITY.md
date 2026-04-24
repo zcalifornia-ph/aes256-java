@@ -28,12 +28,12 @@ Our approach emphasizes:
 
 ## Supported Versions
 
-During the `0.x` pre-release cycle, only the latest tagged version is supported for security fixes.
+Starting with `v1.0.0`, the latest stable `1.x` version is supported for security fixes. Older `0.x` pre-release versions are no longer supported.
 
 | Version | Supported |
 | --- | --- |
-| latest `0.x` | :white_check_mark: |
-| older `0.x` | :x: |
+| latest `1.x` | :white_check_mark: |
+| `0.x` pre-release versions | :x: |
 
 ## Reporting a Vulnerability
 

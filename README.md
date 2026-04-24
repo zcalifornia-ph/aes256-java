@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.3.3
+    Version: v1.0.0
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, Unit 03 interactive CLI wiring, Unit 04 / Bolt 4.1 docs hardening, and Unit 04 / Bolt 4.2 submission packaging plus fresh-extract validation are landed; public-release cleanup remains next).
+    Status: stable (v1.0.0). The documented AES-GCM engine, OOP wrappers, interactive CLI, and built-in selftest now define the supported public baseline.
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -95,7 +95,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 ### OOP Concept Map
 
 Reference notes:
-[`java-oop.txt`](aes256-java/oop-notes/java-oop.txt)  
+Local course OOP definitions used to build this concept map.  
 Mirror in source:
 [`Main.java`](aes256-java/Main.java) header comment
 
@@ -123,7 +123,7 @@ Mirror in source:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.3.3). Interfaces and command shapes may change before the first stable release.
+Status: stable (v1.0.0). The CLI entrypoints and library methods below define the supported `1.x` baseline.
 
 ### Prerequisites
 
@@ -237,10 +237,10 @@ Submission package note:
 
 ### Library Mode
 
-Current baseline (`v0.3.3`):
+Stable baseline (`v1.0.0`):
 
 ```java
-// Current implemented primitives in aes256-java/AesGcmEngine.java:
+// Stable public primitives in aes256-java/AesGcmEngine.java:
 // - PBKDF2WithHmacSHA256 key derivation (210000 iterations, 16-byte salt, 256-bit key)
 // - AES/GCM/NoPadding byte-array encrypt/decrypt with envelope:
 //   salt(16) || iv(12) || ciphertext || tag(16)
@@ -265,6 +265,8 @@ String label = textCipher.banner();
 // In-program assertions:
 int selfTestExit = SelfTest.runDefault(System.out); // 0 when all checks pass
 ```
+
+Compatibility note: the supported `1.x` public surface is the documented `Main` CLI entrypoints, `SelfTest` runner, `AesGcmEngine` encrypt/decrypt overloads, and the `TextCipher` / `FileCipher` wrappers shown above.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -300,8 +302,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.3.1 - Unit 04 / Bolt 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
 - [x] v0.3.2 - CLI presentation polish (bannered screens, clear/return flow, about credits, and console-aware output encoding).
 - [x] v0.3.3 - PE04 submission packaging (`Adeva_California_Rizal_PE04.zip`), checksum publication, rubric self-check, and fresh-extract validation.
-- [ ] v0.4.0 - Public release cleanup, sample-project guidance, and API stabilization.
-- [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
+- [x] v0.4.0 - Public release cleanup, integration guidance, and API stabilization.
+- [x] v1.0.0 - First stable public release with documented API, acceptance tests, and reconciled governance docs.
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.
 

@@ -58,8 +58,8 @@ Validation re-run for docs fidelity:
 ## docs.task Reconciliation Notes
 
 - `docs/` was reviewed and remains consistent with current visible project state.
-- No `learn/` directory was present in this workspace.
-- No root `REQUIREMENTS.md` file was present in this workspace.
+- No local learning artifacts were present in that workspace.
+- The private requirements baseline was not present in that workspace.
 - Root public docs were updated only where necessary to match current code behavior and versioning.
 
 ## Deletion Assessment
