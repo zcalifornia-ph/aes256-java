@@ -1,6 +1,38 @@
 # Changelog
 
-Status: pre-alpha (v0.1.2). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.1.3). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.1.3
+
+### Added or Changed
+- Added Unit 02 / Bolt 2.3 in-program assertion artifacts:
+  - `aes256-java/SelfTest.java`
+  - `aes256-java/Main.java`
+- Implemented `SelfTest` pass/fail scenario runner with process-friendly exit-code policy (`0` all pass, non-zero otherwise).
+- Implemented dual selftest invocation paths required by `TEST-10`:
+  - `java Main --selftest`
+  - menu option `5` from interactive `Main`.
+- Updated `README.md` version/status/features/usage/roadmap sections to reflect `v0.1.3`.
+- Added `docs/version-0.1.3-docs.md` with detailed implementation and validation evidence.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Menu-path selftest invocation (`5`, then `0`) passed and reported `selftest exit code=0`.
+- Optional large selftest path passed:
+  - `java Main --selftest-large` with `PASS TEST-03 round-trip 128MiB`.
+
+### For Deletion
+- `aes256-java/AesGcmEngine.class`
+- `aes256-java/AesGcmEngine$1.class`
+- `aes256-java/AesGcmEngine$2.class`
+- `aes256-java/CryptoOperation.class`
+- `aes256-java/FileCipher.class`
+- `aes256-java/Main.class`
+- `aes256-java/SelfTest.class`
+- `aes256-java/SelfTest$CheckedCase.class`
+- `aes256-java/SelfTest$Counters.class`
+- `aes256-java/TextCipher.class`
 
 ## v0.1.2
 
