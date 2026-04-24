@@ -11,14 +11,15 @@ import java.util.Scanner;
 import javax.crypto.AEADBadTagException;
 
 /*
- * OOP CONCEPT MAP (source: oop-notes/java-oop.txt)
- * - Encapsulation: CryptoOperation#passphrase with controlled access via
- *   getPassphrase(), setPassphrase(char[]), and consumePassphrase().
- * - Inheritance: TextCipher extends CryptoOperation; FileCipher extends CryptoOperation.
- * - Method Overloading: TextCipher#encrypt(String) / TextCipher#encrypt(char[]) and
- *   FileCipher#encrypt(Path) / FileCipher#encrypt(File) / FileCipher#encrypt(Path, Path).
- * - Method Overriding: TextCipher#describe() and FileCipher#describe() override
- *   CryptoOperation#describe().
+ * OOP CONCEPT MAP (canonical: ai-dlc-docs/design-artifacts/OOP-CONCEPT-MAP.md)
+ * Source: oop-notes/java-oop.txt
+ * Encapsulation -> CryptoOperation#passphrase with getPassphrase(), setPassphrase(char[]),
+ *   consumePassphrase(), clearStoredPassphrase().
+ * Inheritance -> TextCipher extends CryptoOperation; FileCipher extends CryptoOperation.
+ * Method Overloading -> TextCipher#encrypt(String) and TextCipher#encrypt(char[]);
+ *   FileCipher#encrypt(Path), FileCipher#encrypt(File), FileCipher#encrypt(Path, Path).
+ * Method Overriding -> TextCipher#describe() and FileCipher#describe()
+ *   override CryptoOperation#describe().
  */
 /**
  * Interactive CLI entrypoint for aes256-java.

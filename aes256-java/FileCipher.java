@@ -98,6 +98,11 @@ public final class FileCipher extends CryptoOperation {
         return decrypt(normalizedInput, output);
     }
 
+    /**
+     * Provides a short descriptor used by CLI and docs surfaces.
+     *
+     * @return constant operation label
+     */
     @Override
     public String describe() {
         return "FileCipher";

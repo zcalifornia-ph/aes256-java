@@ -1,6 +1,26 @@
 # Changelog
 
-Status: pre-alpha (v0.3.0). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.3.1). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.3.1
+
+### Added or Changed
+- Completed Unit-04 / BOLT-4.1 public release surfaces for OOP documentation clarity:
+  - synchronized the OOP concept map between `README.md` and the top-of-file `Main.java` comment block,
+  - added missing public-member Javadocs for wrapper descriptor overrides in `aes256-java/TextCipher.java` and `aes256-java/FileCipher.java`.
+- Updated `README.md` version/status markers from `v0.3.0` to `v0.3.1`.
+- Updated `README.md` roadmap to mark `v0.3.1` complete and move packaging guidance to `v0.3.2`.
+- Added `docs/version-0.3.1-docs.md` with full change notes, traceability context, and validation evidence.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `TEST-12` concept-map consistency check passed across README and `Main.java` source anchors.
+- Public-member Javadoc coverage check passed for current source set.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.3.0
 

@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.3.0
+    Version: v0.3.1
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and Unit 03 full interactive CLI wiring are landed; root documentation has been reconciled for the next packaging phase).
+    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, Unit 03 interactive CLI wiring, and Unit 04 / Bolt 4.1 documentation hardening are landed; packaging remains next).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -50,6 +50,7 @@
 
 1. [About The Project](#about-the-project)
    - [Features](#features)
+   - [OOP Concept Map](#oop-concept-map)
    - [What aes256-java Is Not](#what-aes256-java-is-not)
    - [Built With](#built-with)
 2. [Getting Started](#getting-started)
@@ -82,11 +83,26 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolts 2.1 and 2.2).
 - In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (Bolt 2.3).
 - Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (Unit 03 / Bolt 3.2).
+- Unit 04 / Bolt 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
 - Zero external dependencies; pure Java on top of `javax.crypto`.
 - Clean OOP architecture suitable for learning, extending, or integrating.
+
+### OOP Concept Map
+
+Reference notes:
+[`java-oop.txt`](aes256-java/oop-notes/java-oop.txt)  
+Mirror in source:
+[`Main.java`](aes256-java/Main.java) header comment
+
+| Concept | Concrete Source Anchor |
+|---|---|
+| Encapsulation | `CryptoOperation#passphrase` with `getPassphrase()`, `setPassphrase(char[])`, `consumePassphrase()`, `clearStoredPassphrase()` |
+| Inheritance | `TextCipher extends CryptoOperation`; `FileCipher extends CryptoOperation` |
+| Method Overloading | `TextCipher#encrypt(String)` and `TextCipher#encrypt(char[])`; `FileCipher#encrypt(Path)`, `FileCipher#encrypt(File)`, `FileCipher#encrypt(Path, Path)` |
+| Method Overriding | `TextCipher#describe()` and `FileCipher#describe()` override `CryptoOperation#describe()` |
 
 ### What aes256-java Is Not
 
@@ -105,7 +121,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.3.0). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.3.1). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -194,7 +210,7 @@ decrypt text failed: wrong passphrase or corrupted ciphertext.
 
 ### Library Mode
 
-Current baseline (`v0.3.0`):
+Current baseline (`v0.3.1`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -254,7 +270,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.2.1 - Unit 03 / Bolt 3.1 menu scaffolding (`--help`, About, resilient menu loop, and staged handlers).
 - [x] v0.2.2 - Full interactive encrypt/decrypt CLI wiring and friendly error mapping (Unit 03 / Bolt 3.2).
 - [x] v0.3.0 - Documentation reconciliation (`docs.task`) and release metadata alignment.
-- [ ] v0.3.1 - Library packaging guidance, sample projects, and API stabilization.
+- [x] v0.3.1 - Unit 04 / Bolt 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
+- [ ] v0.3.2 - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.
