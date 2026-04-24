@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.1.3
+    Version: v0.2.0
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and in-program selftest entry hooks are landed; full interactive encrypt/decrypt CLI wiring remains in progress).
+    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and in-program selftest entry hooks are landed; interactive encrypt/decrypt CLI actions remain in progress).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -104,7 +104,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.1.3). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.2.0). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -148,18 +148,26 @@ The project exposes two intended usage modes. Concrete command and API signature
 
 ### CLI Mode
 
-Planned shape:
+Current available entry points:
+
+```text
+java Main --selftest
+java Main --selftest-large
+java Main
+  -> option 5 runs SelfTest
+```
+
+Planned interactive encrypt/decrypt shape:
 
 ```text
 aes256-java encrypt --text  "hello"        --password "..."
 aes256-java encrypt --file  path/to/input  --password "..." --out path/to/output.enc
 aes256-java decrypt --file  path/to/input  --password "..." --out path/to/output
-java Main --selftest
 ```
 
 ### Library Mode
 
-Current baseline (`v0.1.3`):
+Current baseline (`v0.2.0`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -215,8 +223,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.1.1 - OOP abstraction hierarchy skeleton (Unit 02 / Bolt 2.1).
 - [x] v0.1.2 - OOP behavior wrappers implemented (Unit 02 / Bolt 2.2).
 - [x] v0.1.3 - In-program selftest integration with dual entry paths (Unit 02 / Bolt 2.3).
-- [ ] v0.1.x - Full interactive encrypt/decrypt CLI wiring.
-- [ ] v0.2.x - CLI entry point, argument parsing, and usability polish.
+- [x] v0.2.0 - CLI entrypoint with selftest flags/menu routing (`Main` + `SelfTest`).
+- [ ] v0.2.x - Full interactive encrypt/decrypt CLI wiring and friendly error mapping.
 - [ ] v0.3.x - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
 

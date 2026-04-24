@@ -1,6 +1,23 @@
 # Changelog
 
-Status: pre-alpha (v0.1.3). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.2.0). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.2.0
+
+### Added or Changed
+- Reconciled root documentation via `docs.task` against current codebase behavior and public docs constraints.
+- Bumped public versioning references from `v0.1.3` to `v0.2.0` in `README.md` and release docs.
+- Added `docs/version-0.2.0-docs.md` with the milestone summary, validation evidence, and follow-up scope.
+- Preserved contributor policy docs (`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`) unchanged because no governance-policy updates were required.
+- Sanitized deletion notes to avoid exposing ignored internal artifact paths.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Menu-path selftest invocation (`5`, then `0`) passed and reported `selftest exit code=0`.
+
+### For Deletion
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
 
 ## v0.1.3
 
@@ -23,16 +40,7 @@ Status: pre-alpha (v0.1.3). Interfaces, commands, and packaging may change befor
   - `java Main --selftest-large` with `PASS TEST-03 round-trip 128MiB`.
 
 ### For Deletion
-- `aes256-java/AesGcmEngine.class`
-- `aes256-java/AesGcmEngine$1.class`
-- `aes256-java/AesGcmEngine$2.class`
-- `aes256-java/CryptoOperation.class`
-- `aes256-java/FileCipher.class`
-- `aes256-java/Main.class`
-- `aes256-java/SelfTest.class`
-- `aes256-java/SelfTest$CheckedCase.class`
-- `aes256-java/SelfTest$Counters.class`
-- `aes256-java/TextCipher.class`
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
 
 ## v0.1.2
 
@@ -55,12 +63,7 @@ Status: pre-alpha (v0.1.3). Interfaces, commands, and packaging may change befor
   - `PASS TEST-12 concept-map-implementation-lint`
 
 ### For Deletion
-- `aes256-java/AesGcmEngine.class`
-- `aes256-java/AesGcmEngine$1.class`
-- `aes256-java/AesGcmEngine$2.class`
-- `aes256-java/CryptoOperation.class`
-- `aes256-java/FileCipher.class`
-- `aes256-java/TextCipher.class`
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
 
 ## v0.1.1
 
@@ -77,12 +80,7 @@ Status: pre-alpha (v0.1.3). Interfaces, commands, and packaging may change befor
 - `TEST-12 concept-map-lint` passed, confirming source anchors for encapsulation, inheritance, method overloading, and method overriding.
 
 ### For Deletion
-- `aes256-java/AesGcmEngine.class`
-- `aes256-java/AesGcmEngine$1.class`
-- `aes256-java/AesGcmEngine$2.class`
-- `aes256-java/CryptoOperation.class`
-- `aes256-java/FileCipher.class`
-- `aes256-java/TextCipher.class`
+- Local Java compile artifacts generated during validation runs should be cleaned before packaging.
 
 ## v0.1.0
 
