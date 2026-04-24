@@ -1,6 +1,30 @@
 # Changelog
 
-Status: pre-alpha (v0.2.0). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.2.1). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.2.1
+
+### Added or Changed
+- Completed Unit 03 / BOLT-3.1 menu scaffolding in `aes256-java/Main.java`:
+  - added OOP concept map header comment in `Main.java` per requirements contract,
+  - added `--help` handling with educational warning output,
+  - kept `--selftest` and `--selftest-large` routing with process exit-code behavior,
+  - expanded interactive menu handling with explicit option placeholders (`1`..`4`), SelfTest route (`5`), About output (`6`), and graceful EOF handling.
+- Updated `README.md` version/status/features/usage/roadmap sections from `v0.2.0` to `v0.2.1`.
+- Added `docs/version-0.2.1-docs.md` with full implementation notes, validation evidence, and follow-up scope.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`; no policy changes were required for this version.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --help` passed and printed usage/options text plus educational warning.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Menu-path selftest invocation (`5`, then `0`) passed and reported `selftest exit code=0`.
+- Menu-path quit invocation (`0`) exited cleanly with `bye`.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.2.0
 

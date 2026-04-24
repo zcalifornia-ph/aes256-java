@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.2.0
+    Version: v0.2.1
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and in-program selftest entry hooks are landed; interactive encrypt/decrypt CLI actions remain in progress).
+    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and Unit 03 menu scaffolding are landed; full encrypt/decrypt CLI action wiring remains in progress).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -81,6 +81,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, Bolt 1.3).
 - OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolts 2.1 and 2.2).
 - In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (Bolt 2.3).
+- CLI menu scaffolding in `Main` with `--help`, About output, robust loop/EOF handling, and staged action placeholders for Unit 03 / Bolt 3.1.
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -104,7 +105,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.2.0). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.2.1). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -151,10 +152,13 @@ The project exposes two intended usage modes. Concrete command and API signature
 Current available entry points:
 
 ```text
+java Main --help
 java Main --selftest
 java Main --selftest-large
 java Main
   -> option 5 runs SelfTest
+  -> option 6 prints About
+  -> options 1-4 are scaffolded and wired in the next bolt
 ```
 
 Planned interactive encrypt/decrypt shape:
@@ -167,7 +171,7 @@ aes256-java decrypt --file  path/to/input  --password "..." --out path/to/output
 
 ### Library Mode
 
-Current baseline (`v0.2.0`):
+Current baseline (`v0.2.1`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -224,7 +228,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.1.2 - OOP behavior wrappers implemented (Unit 02 / Bolt 2.2).
 - [x] v0.1.3 - In-program selftest integration with dual entry paths (Unit 02 / Bolt 2.3).
 - [x] v0.2.0 - CLI entrypoint with selftest flags/menu routing (`Main` + `SelfTest`).
-- [ ] v0.2.x - Full interactive encrypt/decrypt CLI wiring and friendly error mapping.
+- [x] v0.2.1 - Unit 03 / Bolt 3.1 menu scaffolding (`--help`, About, resilient menu loop, and staged handlers).
+- [ ] v0.2.2 - Full interactive encrypt/decrypt CLI wiring and friendly error mapping (Unit 03 / Bolt 3.2).
 - [ ] v0.3.x - Library packaging guidance, sample projects, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
 
