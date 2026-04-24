@@ -1,6 +1,27 @@
 # Changelog
 
-Status: stable (v1.0.1). The documented CLI entrypoints and library surface define the supported `1.x` baseline.
+Status: stable (v1.0.2). The documented CLI entrypoints and library surface define the supported `1.x` baseline.
+
+## v1.0.2
+
+### Added or Changed
+- Removed internal AI-DLC terminology from class-level Javadoc comments across all five Java source files:
+  - `aes256-java/AesGcmEngine.java`: removed BOLT-1.1/1.2/1.3 changelog lines from the class Javadoc, leaving only the plain class description.
+  - `aes256-java/CryptoOperation.java`: replaced Unit-02 references with a plain description of the class passphrase lifecycle purpose.
+  - `aes256-java/FileCipher.java`: replaced Unit-01 and "requirements contract" references with a public-facing description of the file cipher's stream wrapping and filename convention behavior.
+  - `aes256-java/Main.java`: removed the internal ai-dlc-docs path and oop-notes path references from the OOP CONCEPT MAP block comment; the concept map content itself is retained as it is useful to readers.
+  - `aes256-java/TextCipher.java`: replaced Unit-01 byte-array envelope reference with a plain description of UTF-8 encoding and AES-256/GCM delegation.
+- Updated `README.md` version marker to `v1.0.2` and added a roadmap entry for this release.
+- Added `docs/version-1.0.2-docs.md` with full scope and validation notes.
+
+### Validation Notes
+- No API, runtime, or behavioral changes. Only Javadoc and block-comment text was modified.
+- The OOP CONCEPT MAP block in `Main.java` is preserved without its internal file path references; the concept-map table in `README.md` remains accurate.
+
+### For Deletion
+- Generated Java class artifacts from local runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v1.0.1
 

@@ -28,7 +28,7 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v1.0.1
+    Version: v1.0.2
     <br />
     Status: Stable Release
     <br />
@@ -305,6 +305,7 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.4.0 - Public release cleanup, integration guidance, and API stabilization.
 - [x] v1.0.0 - First stable public release with documented API, acceptance tests, and reconciled governance docs.
 - [x] v1.0.1 - Documentation terminology cleanup across root docs, release notes, and learning guides (no runtime or API changes).
+- [x] v1.0.2 - Source Javadoc cleanup: removed internal AI-DLC terminology from class-level comments across all five Java source files (no runtime or API changes).
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.
 
