@@ -77,19 +77,28 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 
 ### Features
 
-- PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`, MILESTONE 1.1).
-- Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, MILESTONE 1.2).
-- Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`, MILESTONE 1.3).
-- OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, milestones 2.1 and 2.2).
-- In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (MILESTONE 2.3).
-- Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (PHASE 03 / MILESTONE 3.2).
-- PHASE 04 / MILESTONE 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
+- PBKDF2-HMAC-SHA256 key-derivation baseline (`AesGcmEngine`).
+
+- Byte-array AES-256/GCM encrypt/decrypt API (`AesGcmEngine`).
+
+- Stream-based AES-256/GCM encrypt/decrypt API (`AesGcmEngine`).
+
+- OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`).
+
+- In-program selftest runner (`SelfTest`).
+
+- Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping.
+
 - Branded CLI presentation with header/banner output, action-specific screens, return-to-menu prompts, and console-aware output encoding in `Main`.
-- PE04 submission packaging outputs under [`aes256-java/`](aes256-java/README.md): flat archive `Adeva_California_Rizal_PE04.zip`, `sha256.txt`, and `rubric-self-check.md`.
+
 - AES-256 encryption and decryption for plaintext input.
+
 - AES-256 encryption and decryption for files.
+
 - Dual-mode usage: standalone CLI or embeddable library.
+
 - Zero external dependencies; pure Java on top of `javax.crypto`.
+
 - Clean OOP architecture suitable for learning, extending, or integrating.
 
 ### OOP Concept Map
