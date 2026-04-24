@@ -1,6 +1,23 @@
 # Changelog
 
-Status: pre-alpha (v0.2.2). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.3.0). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.3.0
+
+### Added or Changed
+- Reconciled root documentation via `docs.task` using the current project requirements baseline for consistency checks.
+- Bumped public version markers from `v0.2.2` to `v0.3.0` in `README.md`.
+- Sanitized root changelog wording to avoid exposing internal or ignored workflow artifact paths.
+- Added `docs/version-0.3.0-docs.md` with expanded release-context and documentation reconciliation notes.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.2.2
 
@@ -9,10 +26,7 @@ Status: pre-alpha (v0.2.2). Interfaces, commands, and packaging may change befor
   - wired menu options `1`..`4` to `TextCipher` and `FileCipher`,
   - added friendly exception mapping for wrong passphrase/corruption (`AEADBadTagException`), missing files, and overwrite refusal,
   - added passphrase prompting strategy with masked `System.console().readPassword()` when available and explicit fallback warning in non-console runs.
-- Added Unit 03 BOLT-3.2 artifacts:
-  - `aes256-java/ai-dlc-docs/design-artifacts/unit-03/adr/bolt-3-2-adr.md`
-  - `aes256-java/ai-dlc-docs/traceability/unit-03/bolt-3-2-traceability.md`
-- Updated Unit-03 design compatibility artifacts and `ai-dlc-docs/requirements/REQUIREMENTS.md` for BOLT-3.2 completion and next-task progression.
+- Updated internal Unit-03 lifecycle artifacts and requirements state to mark BOLT-3.2 complete.
 - Updated `README.md` to `v0.2.2` with wired CLI usage and sample transcript.
 
 ### Validation Notes
