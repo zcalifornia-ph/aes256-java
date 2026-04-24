@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.3.2
+    Version: v0.3.3
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, Unit 03 interactive CLI wiring, Unit 04 / Bolt 4.1 documentation hardening, and the v0.3.2 CLI presentation polish are landed; packaging remains next).
+    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, Unit 03 interactive CLI wiring, Unit 04 / Bolt 4.1 docs hardening, and Unit 04 / Bolt 4.2 submission packaging plus fresh-extract validation are landed; public-release cleanup remains next).
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -85,6 +85,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (Unit 03 / Bolt 3.2).
 - Unit 04 / Bolt 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
 - Branded CLI presentation with header/banner output, action-specific screens, return-to-menu prompts, and console-aware output encoding in `Main`.
+- PE04 submission packaging outputs under [`aes256-java/`](aes256-java/README.md): flat archive `Adeva_California_Rizal_PE04.zip`, `sha256.txt`, and `rubric-self-check.md`.
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
@@ -122,7 +123,7 @@ Mirror in source:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.3.2). Interfaces and command shapes may change before the first stable release.
+Status: pre-alpha (v0.3.3). Interfaces and command shapes may change before the first stable release.
 
 ### Prerequisites
 
@@ -157,6 +158,11 @@ javac -version
    ```sh
    java Main --selftest
    ```
+6. Review the packaged submission outputs when you need the flat-directory grader bundle:
+   - [`aes256-java/README.md`](aes256-java/README.md)
+   - [`aes256-java/rubric-self-check.md`](aes256-java/rubric-self-check.md)
+   - `aes256-java/Adeva_California_Rizal_PE04.zip`
+   - `aes256-java/sha256.txt`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -222,9 +228,16 @@ Passphrase: wrong
 decrypt text failed: wrong passphrase or corrupted ciphertext.
 ```
 
+Submission package note:
+
+- The repository now includes a flat-directory submission bundle at `aes256-java/Adeva_California_Rizal_PE04.zip`.
+- Its published checksum lives at `aes256-java/sha256.txt`.
+- The grader-facing extracted-copy instructions live in [`aes256-java/README.md`](aes256-java/README.md).
+- The row-by-row rubric mapping lives in [`aes256-java/rubric-self-check.md`](aes256-java/rubric-self-check.md).
+
 ### Library Mode
 
-Current baseline (`v0.3.2`):
+Current baseline (`v0.3.3`):
 
 ```java
 // Current implemented primitives in aes256-java/AesGcmEngine.java:
@@ -286,7 +299,8 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.3.0 - Documentation reconciliation (`docs.task`) and release metadata alignment.
 - [x] v0.3.1 - Unit 04 / Bolt 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
 - [x] v0.3.2 - CLI presentation polish (bannered screens, clear/return flow, about credits, and console-aware output encoding).
-- [ ] v0.3.3 - Library packaging guidance, sample projects, and API stabilization.
+- [x] v0.3.3 - PE04 submission packaging (`Adeva_California_Rizal_PE04.zip`), checksum publication, rubric self-check, and fresh-extract validation.
+- [ ] v0.4.0 - Public release cleanup, sample-project guidance, and API stabilization.
 - [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.

@@ -1,6 +1,41 @@
 # Changelog
 
-Status: pre-alpha (v0.3.2). Interfaces, commands, and packaging may change before the first stable release.
+Status: pre-alpha (v0.3.3). Interfaces, commands, and packaging may change before the first stable release.
+
+## v0.3.3
+
+### Added or Changed
+- Completed Unit-04 / BOLT-4.2 submission packaging for the flat-directory PE04 deliverable:
+  - added `aes256-java/README.md` as the grader-facing submission guide,
+  - added `aes256-java/rubric-self-check.md` with row-by-row rubric mapping sourced from `oop-notes/rubrics.txt`,
+  - built `aes256-java/Adeva_California_Rizal_PE04.zip`,
+  - published `aes256-java/sha256.txt` for the archive checksum.
+- Updated root `README.md` version/status/features/usage/roadmap sections from `v0.3.2` to `v0.3.3`.
+- Added `docs/version-0.3.3-docs.md` with the full packaging notes, archive contents, and fresh-extract validation evidence.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`; no policy or process changes were required for this version.
+
+### Validation Notes
+- Archive filename check passed: `Adeva_California_Rizal_PE04.zip`.
+- Archive listing check passed; the zip contains only:
+  - `AesGcmEngine.java`
+  - `CryptoOperation.java`
+  - `FileCipher.java`
+  - `Main.java`
+  - `README.md`
+  - `SelfTest.java`
+  - `TextCipher.java`
+- Fresh-extract validation passed:
+  - `javac *.java`
+  - `java Main`
+  - `java Main --selftest` with `SELFTEST SUMMARY passed=6 failed=0`
+  - menu option `5` route plus return-to-menu prompt
+- Published SHA-256:
+  - `8b47782dc7d2dd9596196b33c80c14c6b7d90a24d8c77a9be757a0c9918842ae`
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.3.2
 
