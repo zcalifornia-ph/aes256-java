@@ -89,6 +89,11 @@ public final class TextCipher extends CryptoOperation {
         }
     }
 
+    /**
+     * Provides a short descriptor used by CLI and docs surfaces.
+     *
+     * @return constant operation label
+     */
     @Override
     public String describe() {
         return "TextCipher";

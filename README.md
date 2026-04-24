@@ -28,9 +28,9 @@
   <p align="center">
     <strong>Lightweight, zero-dependency AES-256 encryption for Java. Built with clean OOP design; encapsulation, inheritance, overloading, and overriding.</strong>
     <br />
-    Version: v0.3.0
+    Version: v1.0.0
     <br />
-    Status: pre-alpha (core AES-GCM APIs, Unit 02 OOP wrappers, and Unit 03 full interactive CLI wiring are landed; root documentation has been reconciled for the next packaging phase).
+    Status: stable (v1.0.0). The documented AES-GCM engine, OOP wrappers, interactive CLI, and built-in selftest now define the supported public baseline.
     <br />
     <a href="https://github.com/zcalifornia-ph/aes256-java"><strong>Explore the docs »</strong></a>
     <br />
@@ -50,6 +50,7 @@
 
 1. [About The Project](#about-the-project)
    - [Features](#features)
+   - [OOP Concept Map](#oop-concept-map)
    - [What aes256-java Is Not](#what-aes256-java-is-not)
    - [Built With](#built-with)
 2. [Getting Started](#getting-started)
@@ -82,11 +83,28 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 - OOP abstraction layer with implemented wrappers (`CryptoOperation`, `TextCipher`, `FileCipher`, Bolts 2.1 and 2.2).
 - In-program selftest runner (`SelfTest`) reachable via `java Main --selftest` and menu option `5` (Bolt 2.3).
 - Fully wired interactive CLI in `Main` for text/file encrypt/decrypt flows with friendly error mapping (Unit 03 / Bolt 3.2).
+- Unit 04 / Bolt 4.1 docs hardening: synchronized OOP concept map in `README.md` and `Main.java` with public-member Javadoc coverage updates.
+- Branded CLI presentation with header/banner output, action-specific screens, return-to-menu prompts, and console-aware output encoding in `Main`.
+- PE04 submission packaging outputs under [`aes256-java/`](aes256-java/README.md): flat archive `Adeva_California_Rizal_PE04.zip`, `sha256.txt`, and `rubric-self-check.md`.
 - AES-256 encryption and decryption for plaintext input.
 - AES-256 encryption and decryption for files.
 - Dual-mode usage: standalone CLI or embeddable library.
 - Zero external dependencies; pure Java on top of `javax.crypto`.
 - Clean OOP architecture suitable for learning, extending, or integrating.
+
+### OOP Concept Map
+
+Reference notes:
+Local course OOP definitions used to build this concept map.  
+Mirror in source:
+[`Main.java`](aes256-java/Main.java) header comment
+
+| Concept | Concrete Source Anchor |
+|---|---|
+| Encapsulation | `CryptoOperation#passphrase` with `getPassphrase()`, `setPassphrase(char[])`, `consumePassphrase()`, `clearStoredPassphrase()` |
+| Inheritance | `TextCipher extends CryptoOperation`; `FileCipher extends CryptoOperation` |
+| Method Overloading | `TextCipher#encrypt(String)` and `TextCipher#encrypt(char[])`; `FileCipher#encrypt(Path)`, `FileCipher#encrypt(File)`, `FileCipher#encrypt(Path, Path)` |
+| Method Overriding | `TextCipher#describe()` and `FileCipher#describe()` override `CryptoOperation#describe()` |
 
 ### What aes256-java Is Not
 
@@ -105,7 +123,7 @@ aes256-java is a lightweight, zero-dependency AES-256 encryption toolkit for Jav
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Status: pre-alpha (v0.3.0). Interfaces and command shapes may change before the first stable release.
+Status: stable (v1.0.0). The CLI entrypoints and library methods below define the supported `1.x` baseline.
 
 ### Prerequisites
 
@@ -140,6 +158,11 @@ javac -version
    ```sh
    java Main --selftest
    ```
+6. Review the packaged submission outputs when you need the flat-directory grader bundle:
+   - [`aes256-java/README.md`](aes256-java/README.md)
+   - [`aes256-java/rubric-self-check.md`](aes256-java/rubric-self-check.md)
+   - `aes256-java/Adeva_California_Rizal_PE04.zip`
+   - `aes256-java/sha256.txt`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -163,41 +186,61 @@ java Main
   -> option 2 decrypts text (friendly wrong-passphrase/corruption mapping)
   -> option 3 encrypts file (<input>.enc)
   -> option 4 decrypts file (strip .enc else .dec)
-  -> option 5 runs SelfTest
-  -> option 6 prints About
+  -> option 5 runs the smoke test suite
+  -> option 6 prints About / credits
 ```
+
+Presentation notes:
+
+- Help, menu, and action screens render a branded header before the active content.
+- When a real console is attached, `Main` clears between menu/action screens; when not attached, it falls back to spacer lines and still keeps the workflow readable.
+- After each action, the CLI pauses on `Press Enter to return to menu...` so the result stays visible before the next clear/menu repaint.
 
 Sample interactive transcript (non-console fallback mode):
 
 ```text
-=== aes256-java ===
-1) Encrypt text
-2) Decrypt text
-3) Encrypt file
-4) Decrypt file
-5) SelfTest
-6) About
-0) Quit
-Select option: 1
+<banner>
+AES-256-GCM LEARNING CLI | TEXT + FILE ENCRYPTION
+==================================================
+[ Menu ]
+
+  1) Encrypt text
+  2) Decrypt text
+  3) Encrypt file
+  4) Decrypt file
+  5) Run Smoke Test
+  6) About
+  0) Quit
+
+Input: 1
 Plaintext: hello
 warning: console is not attached; passphrase input will be visible.
 Passphrase: secret
 ciphertext (Base64):
 <base64-envelope>
 
-Select option: 2
+Press Enter to return to menu...
+
+Input: 2
 Ciphertext (Base64): <base64-envelope>
 warning: console is not attached; passphrase input will be visible.
 Passphrase: wrong
 decrypt text failed: wrong passphrase or corrupted ciphertext.
 ```
 
+Submission package note:
+
+- The repository now includes a flat-directory submission bundle at `aes256-java/Adeva_California_Rizal_PE04.zip`.
+- Its published checksum lives at `aes256-java/sha256.txt`.
+- The grader-facing extracted-copy instructions live in [`aes256-java/README.md`](aes256-java/README.md).
+- The row-by-row rubric mapping lives in [`aes256-java/rubric-self-check.md`](aes256-java/rubric-self-check.md).
+
 ### Library Mode
 
-Current baseline (`v0.3.0`):
+Stable baseline (`v1.0.0`):
 
 ```java
-// Current implemented primitives in aes256-java/AesGcmEngine.java:
+// Stable public primitives in aes256-java/AesGcmEngine.java:
 // - PBKDF2WithHmacSHA256 key derivation (210000 iterations, 16-byte salt, 256-bit key)
 // - AES/GCM/NoPadding byte-array encrypt/decrypt with envelope:
 //   salt(16) || iv(12) || ciphertext || tag(16)
@@ -222,6 +265,8 @@ String label = textCipher.banner();
 // In-program assertions:
 int selfTestExit = SelfTest.runDefault(System.out); // 0 when all checks pass
 ```
+
+Compatibility note: the supported `1.x` public surface is the documented `Main` CLI entrypoints, `SelfTest` runner, `AesGcmEngine` encrypt/decrypt overloads, and the `TextCipher` / `FileCipher` wrappers shown above.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -254,8 +299,11 @@ Report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.m
 - [x] v0.2.1 - Unit 03 / Bolt 3.1 menu scaffolding (`--help`, About, resilient menu loop, and staged handlers).
 - [x] v0.2.2 - Full interactive encrypt/decrypt CLI wiring and friendly error mapping (Unit 03 / Bolt 3.2).
 - [x] v0.3.0 - Documentation reconciliation (`docs.task`) and release metadata alignment.
-- [ ] v0.3.1 - Library packaging guidance, sample projects, and API stabilization.
-- [ ] v1.0.0 - Public stable release with documented API and acceptance tests.
+- [x] v0.3.1 - Unit 04 / Bolt 4.1 docs hardening (Javadoc pass + OOP concept-map synchronization in `README.md` and `Main.java`).
+- [x] v0.3.2 - CLI presentation polish (bannered screens, clear/return flow, about credits, and console-aware output encoding).
+- [x] v0.3.3 - PE04 submission packaging (`Adeva_California_Rizal_PE04.zip`), checksum publication, rubric self-check, and fresh-extract validation.
+- [x] v0.4.0 - Public release cleanup, integration guidance, and API stabilization.
+- [x] v1.0.0 - First stable public release with documented API, acceptance tests, and reconciled governance docs.
 
 See the [open issues](https://github.com/zcalifornia-ph/aes256-java/issues) for proposed features and known gaps.
 

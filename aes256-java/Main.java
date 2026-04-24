@@ -1,24 +1,31 @@
 import java.io.Console;
+import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 import javax.crypto.AEADBadTagException;
 
 /*
- * OOP CONCEPT MAP (source: oop-notes/java-oop.txt)
- * - Encapsulation: CryptoOperation#passphrase with controlled access via
- *   getPassphrase(), setPassphrase(char[]), and consumePassphrase().
- * - Inheritance: TextCipher extends CryptoOperation; FileCipher extends CryptoOperation.
- * - Method Overloading: TextCipher#encrypt(String) / TextCipher#encrypt(char[]) and
- *   FileCipher#encrypt(Path) / FileCipher#encrypt(File) / FileCipher#encrypt(Path, Path).
- * - Method Overriding: TextCipher#describe() and FileCipher#describe() override
- *   CryptoOperation#describe().
+ * OOP CONCEPT MAP (canonical: ai-dlc-docs/design-artifacts/OOP-CONCEPT-MAP.md)
+ * Source: oop-notes/java-oop.txt
+ * Encapsulation -> CryptoOperation#passphrase with getPassphrase(), setPassphrase(char[]),
+ *   consumePassphrase(), clearStoredPassphrase().
+ * Inheritance -> TextCipher extends CryptoOperation; FileCipher extends CryptoOperation.
+ * Method Overloading -> TextCipher#encrypt(String) and TextCipher#encrypt(char[]);
+ *   FileCipher#encrypt(Path), FileCipher#encrypt(File), FileCipher#encrypt(Path, Path).
+ * Method Overriding -> TextCipher#describe() and FileCipher#describe()
+ *   override CryptoOperation#describe().
  */
 /**
  * Interactive CLI entrypoint for aes256-java.
@@ -28,6 +35,20 @@ import javax.crypto.AEADBadTagException;
  */
 public final class Main {
 
+    private static final String CLI_LOGO =
+            String.join(
+                    System.lineSeparator(),
+                    " █████╗ ███████╗███████╗       ██████╗██╗     ██╗",
+                    "██╔══██╗██╔════╝██╔════╝      ██╔════╝██║     ██║",
+                    "███████║█████╗  ███████╗█████╗██║     ██║     ██║",
+                    "██╔══██║██╔══╝  ╚════██║╚════╝██║     ██║     ██║",
+                    "██║  ██║███████╗███████║      ╚██████╗███████╗██║",
+                    "╚═╝  ╚═╝╚══════╝╚══════╝       ╚═════╝╚══════╝╚═╝");
+    private static final String CLI_SUBTITLE =
+            "AES-256-GCM LEARNING CLI | TEXT + FILE ENCRYPTION";
+    private static final String CLI_DIVIDER =
+            "==================================================";
+    private static final int CLEAR_FALLBACK_LINES = 40;
     private static final String HELP_TEXT =
             String.join(
                     System.lineSeparator(),
@@ -54,6 +75,8 @@ public final class Main {
      * @param args command-line args
      */
     public static void main(String[] args) {
+        configureConsoleEncoding();
+
         if (hasArg(args, "--help")) {
             printHelp();
             return;
@@ -77,7 +100,11 @@ public final class Main {
 
     private static void runMenu() {
         try (Scanner scanner = new Scanner(System.in)) {
+            boolean clearBeforeMenu = true;
             while (true) {
+                if (clearBeforeMenu) {
+                    clearConsole();
+                }
                 printMenu();
 
                 if (!scanner.hasNextLine()) {
@@ -87,29 +114,50 @@ public final class Main {
                 }
 
                 String choice = scanner.nextLine().trim();
+                clearBeforeMenu = false;
                 try {
                     switch (choice) {
                         case "1":
+                            beginActionScreen("Encrypt Text");
                             encryptText(scanner);
+                            promptEnterToContinue(scanner);
+                            clearBeforeMenu = true;
                             break;
                         case "2":
+                            beginActionScreen("Decrypt Text");
                             decryptText(scanner);
+                            promptEnterToContinue(scanner);
+                            clearBeforeMenu = true;
                             break;
                         case "3":
+                            beginActionScreen("Encrypt File");
                             encryptFile(scanner);
+                            promptEnterToContinue(scanner);
+                            clearBeforeMenu = true;
                             break;
                         case "4":
+                            beginActionScreen("Decrypt File");
                             decryptFile(scanner);
+                            promptEnterToContinue(scanner);
+                            clearBeforeMenu = true;
                             break;
                         case "5":
+                            beginActionScreen("SelfTest");
                             int code = SelfTest.runDefault(System.out);
                             System.out.println("selftest exit code=" + code);
+                            promptEnterToContinue(scanner);
+                            clearBeforeMenu = true;
                             break;
                         case "6":
-                            printAbout();
+                            beginActionScreen("About");
+                            printAboutBody();
+                            promptEnterToContinue(scanner);
+                            clearBeforeMenu = true;
                             break;
                         case "0":
-                            System.out.println("bye");
+                            System.out.println();
+                            System.out.println("Exiting...");
+                            System.out.println();
                             return;
                         default:
                             System.out.println("invalid menu choice");
@@ -126,27 +174,118 @@ public final class Main {
 
     private static void printMenu() {
         System.out.println();
-        System.out.println("=== aes256-java ===");
-        System.out.println("1) Encrypt text");
-        System.out.println("2) Decrypt text");
-        System.out.println("3) Encrypt file");
-        System.out.println("4) Decrypt file");
-        System.out.println("5) SelfTest");
-        System.out.println("6) About");
-        System.out.println("0) Quit");
-        System.out.print("Select option: ");
+        printCliHeader();
+        System.out.println("[ Menu ]");
+        System.out.println();
+        System.out.println("  1) Encrypt text");
+        System.out.println("  2) Decrypt text");
+        System.out.println("  3) Encrypt file");
+        System.out.println("  4) Decrypt file");
+        System.out.println("  5) Run Smoke Test");
+        System.out.println("  6) About");
+        System.out.println("  0) Quit");
+        System.out.println();
+        System.out.print("Input: ");
     }
 
     private static void printHelp() {
+        printCliHeader();
         System.out.println(HELP_TEXT);
         System.out.println(EDUCATIONAL_WARNING);
     }
 
     private static void printAbout() {
-        System.out.println("aes256-java CLI");
-        System.out.println("Unit-03 menu actions are wired to TextCipher and FileCipher.");
-        System.out.println("Friendly error mapping is enabled for common user failures.");
+        printCliHeader();
+        printAboutBody();
+    }
+
+    private static void printAboutBody() {
+        System.out.println("AES256-JAVA CLI Implementation");
+        System.out.println();
+        System.out.println("Developed by:");
+        System.out.println();
+        System.out.println("Zildjian E. California");
+        System.out.println("Jayrad P. Adeva");
+        System.out.println("Rey Marvin C. Riza");
+        System.out.println();
         System.out.println(EDUCATIONAL_WARNING);
+    }
+
+    private static void printCliHeader() {
+        System.out.println(CLI_LOGO);
+        System.out.println();
+        System.out.println(CLI_SUBTITLE);
+        System.out.println(CLI_DIVIDER);
+    }
+
+    private static void beginActionScreen(String title) {
+        clearConsole();
+        printCliHeader();
+        System.out.println("[ " + title + " ]");
+        System.out.println();
+    }
+
+    private static void configureConsoleEncoding() {
+        Charset outputCharset = detectOutputCharset();
+        System.setOut(
+                new PrintStream(
+                        new FileOutputStream(FileDescriptor.out), true, outputCharset));
+        System.setErr(
+                new PrintStream(
+                        new FileOutputStream(FileDescriptor.err), true, outputCharset));
+    }
+
+    private static Charset detectOutputCharset() {
+        Console console = System.console();
+        if (console != null) {
+            return console.charset();
+        }
+        return StandardCharsets.UTF_8;
+    }
+
+    private static void clearConsole() {
+        Console console = System.console();
+        if (console != null && tryNativeClear()) {
+            return;
+        }
+
+        if (console != null) {
+            System.out.print("\u001b[H\u001b[2J");
+            System.out.flush();
+            return;
+        }
+
+        for (int i = 0; i < CLEAR_FALLBACK_LINES; i++) {
+            System.out.println();
+        }
+    }
+
+    private static boolean tryNativeClear() {
+        String osName = System.getProperty("os.name", "").toLowerCase(Locale.ROOT);
+        ProcessBuilder builder =
+                osName.contains("win")
+                        ? new ProcessBuilder("cmd", "/c", "cls")
+                        : new ProcessBuilder("clear");
+        builder.inheritIO();
+        try {
+            Process process = builder.start();
+            int exitCode = process.waitFor();
+            return exitCode == 0;
+        } catch (IOException ex) {
+            return false;
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            return false;
+        }
+    }
+
+    private static void promptEnterToContinue(Scanner scanner) {
+        System.out.println();
+        System.out.print("Press Enter to return to menu...");
+        if (!scanner.hasNextLine()) {
+            throw new InputClosedException();
+        }
+        scanner.nextLine();
     }
 
     private static void encryptText(Scanner scanner) {

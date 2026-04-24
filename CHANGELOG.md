@@ -1,6 +1,106 @@
 # Changelog
 
-Status: pre-alpha (v0.3.0). Interfaces, commands, and packaging may change before the first stable release.
+Status: stable (v1.0.0). The documented CLI entrypoints and library surface define the supported `1.x` baseline.
+
+## v1.0.0
+
+### Added or Changed
+- Promoted the public documentation set from `v0.3.3` to `v1.0.0` and aligned the visible release/status markers in `README.md`.
+- Documented the supported stable `1.x` baseline for the current CLI entrypoints, `SelfTest` runner, `AesGcmEngine`, `TextCipher`, and `FileCipher` public surfaces.
+- Updated `SECURITY.md` to support the latest stable `1.x` line instead of the older `0.x` pre-release line.
+- Sanitized remaining ignored/internal-path references in `README.md`, `THIRD-PARTY-NOTICES.md`, and historical versioned docs under `docs/`.
+- Added `docs/version-1.0.0-docs.md` with the stable-release reconciliation notes and validation evidence.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.txt`; no policy or license changes were required for this version.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --help` from `aes256-java/` passed.
+- `java Main --selftest` from `aes256-java/` passed with `SELFTEST SUMMARY passed=6 failed=0`.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
+
+## v0.3.3
+
+### Added or Changed
+- Completed Unit-04 / BOLT-4.2 submission packaging for the flat-directory PE04 deliverable:
+  - added `aes256-java/README.md` as the grader-facing submission guide,
+  - added `aes256-java/rubric-self-check.md` with row-by-row rubric mapping sourced from the local course rubric baseline,
+  - built `aes256-java/Adeva_California_Rizal_PE04.zip`,
+  - published `aes256-java/sha256.txt` for the archive checksum.
+- Updated root `README.md` version/status/features/usage/roadmap sections from `v0.3.2` to `v0.3.3`.
+- Added `docs/version-0.3.3-docs.md` with the full packaging notes, archive contents, and fresh-extract validation evidence.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`; no policy or process changes were required for this version.
+
+### Validation Notes
+- Archive filename check passed: `Adeva_California_Rizal_PE04.zip`.
+- Archive listing check passed; the zip contains only:
+  - `AesGcmEngine.java`
+  - `CryptoOperation.java`
+  - `FileCipher.java`
+  - `Main.java`
+  - `README.md`
+  - `SelfTest.java`
+  - `TextCipher.java`
+- Fresh-extract validation passed:
+  - `javac *.java`
+  - `java Main`
+  - `java Main --selftest` with `SELFTEST SUMMARY passed=6 failed=0`
+  - menu option `5` route plus return-to-menu prompt
+- Published SHA-256:
+  - `8b47782dc7d2dd9596196b33c80c14c6b7d90a24d8c77a9be757a0c9918842ae`
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
+
+## v0.3.2
+
+### Added or Changed
+- Polished `aes256-java/Main.java` interactive CLI presentation:
+  - added a branded header/subtitle shell for help, menu, and action screens,
+  - introduced action-specific screen transitions with return-to-menu pauses,
+  - refreshed menu/about/quit wording for a cleaner interactive flow.
+- Added console-output initialization in `aes256-java/Main.java` so CLI output prefers the attached console charset and falls back to UTF-8 when no console charset is available.
+- Updated `README.md` version/status/features/usage/roadmap sections from `v0.3.1` to `v0.3.2`.
+- Added `docs/version-0.3.2-docs.md` with the full implementation notes, behavioral context, and validation evidence for this release.
+- Reviewed `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`; no policy or process changes were required for this version.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `java Main --help` passed and printed the branded CLI header plus usage text.
+- `java Main --selftest` passed with summary `SELFTEST SUMMARY passed=6 failed=0`.
+- Scripted menu-path checks passed for:
+  - option `5` smoke-test route plus return-to-menu flow,
+  - option `6` about/credits route plus clean quit path.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
+
+## v0.3.1
+
+### Added or Changed
+- Completed Unit-04 / BOLT-4.1 public release surfaces for OOP documentation clarity:
+  - synchronized the OOP concept map between `README.md` and the top-of-file `Main.java` comment block,
+  - added missing public-member Javadocs for wrapper descriptor overrides in `aes256-java/TextCipher.java` and `aes256-java/FileCipher.java`.
+- Updated `README.md` version/status markers from `v0.3.0` to `v0.3.1`.
+- Updated `README.md` roadmap to mark `v0.3.1` complete and move packaging guidance to `v0.3.2`.
+- Added `docs/version-0.3.1-docs.md` with full change notes, traceability context, and validation evidence.
+
+### Validation Notes
+- `javac *.java` from `aes256-java/` passed.
+- `TEST-12` concept-map consistency check passed across README and `Main.java` source anchors.
+- Public-member Javadoc coverage check passed for current source set.
+
+### For Deletion
+- Generated Java class artifacts from local validation runs:
+  - `aes256-java/*.class`
+  - `aes256-java/*$*.class`
 
 ## v0.3.0
 
