@@ -204,7 +204,7 @@ public final class Main {
         System.out.println();
         System.out.println("Zildjian E. California");
         System.out.println("Jayrad P. Adeva");
-        System.out.println("Rey Marvin C. Riza");
+        System.out.println("Rey Marvin C. Rizal");
         System.out.println();
         System.out.println(EDUCATIONAL_WARNING);
     }
