@@ -1,4 +1,7 @@
 import java.nio.ByteBuffer;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -14,6 +17,8 @@ import javax.crypto.spec.SecretKeySpec;
  *
  * <p>BOLT-1.1 introduces deterministic PBKDF2 key derivation using a supplied salt.
  * BOLT-1.2 introduces byte-array encrypt/decrypt operations using AES/GCM envelopes.
+ * BOLT-1.3 introduces stream encrypt/decrypt operations using chunked AEAD records with a
+ * fixed 64 KiB transfer buffer.
  */
 public final class AesGcmEngine {
 
@@ -23,6 +28,9 @@ public final class AesGcmEngine {
     static final int GCM_IV_LENGTH_BYTES = 12;
     static final int GCM_TAG_LENGTH_BITS = 128;
     static final int GCM_TAG_LENGTH_BYTES = GCM_TAG_LENGTH_BITS / 8;
+    static final int STREAM_BUFFER_SIZE_BYTES = 64 * 1024;
+    static final int STREAM_RECORD_MAX_PLAINTEXT_BYTES = STREAM_BUFFER_SIZE_BYTES;
+    static final long MAX_STREAM_RECORDS = 1L << 32;
 
     private static final String KDF_ALGORITHM = "PBKDF2WithHmacSHA256";
     private static final String KEY_ALGORITHM = "AES";
@@ -170,10 +178,222 @@ public final class AesGcmEngine {
         }
     }
 
+    /**
+     * Encrypts stream content with AES-256/GCM and writes a binary envelope.
+     *
+     * <p>Envelope layout:
+     * {@code salt(16) || streamIv(12) || record( length(4) || ciphertext || tag(16) )* }.
+     *
+     * @param in plaintext stream source
+     * @param out encrypted envelope destination
+     * @param passphrase passphrase used for key derivation
+     * @throws IOException if stream I/O fails
+     * @throws GeneralSecurityException if encryption cannot complete with the active provider
+     * @throws IllegalArgumentException if stream references are invalid
+     */
+    public void encrypt(InputStream in, OutputStream out, char[] passphrase)
+            throws IOException, GeneralSecurityException {
+        if (in == null) {
+            wipePassphrase(passphrase);
+            throw new IllegalArgumentException("input stream must not be null");
+        }
+        if (out == null) {
+            wipePassphrase(passphrase);
+            throw new IllegalArgumentException("output stream must not be null");
+        }
+
+        byte[] salt = randomBytes(SALT_LENGTH_BYTES);
+        byte[] streamIv = randomBytes(GCM_IV_LENGTH_BYTES);
+        byte[] transferBuffer = new byte[STREAM_RECORD_MAX_PLAINTEXT_BYTES];
+        byte[] recordIv = new byte[GCM_IV_LENGTH_BYTES];
+        long recordIndex = 0;
+        try {
+            SecretKey key = deriveKey(passphrase, salt);
+            Cipher cipher = Cipher.getInstance(CIPHER_TRANSFORMATION);
+
+            out.write(salt);
+            out.write(streamIv);
+
+            int read;
+            while ((read = in.read(transferBuffer)) != -1) {
+                if (read == 0) {
+                    continue;
+                }
+                if (recordIndex >= MAX_STREAM_RECORDS) {
+                    throw new IllegalArgumentException(
+                            "input stream exceeds maximum supported record count");
+                }
+
+                fillRecordIv(streamIv, recordIndex, recordIv);
+                cipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(GCM_TAG_LENGTH_BITS, recordIv));
+
+                byte[] ciphertextAndTag = cipher.doFinal(transferBuffer, 0, read);
+                try {
+                    writeInt(out, read);
+                    out.write(ciphertextAndTag);
+                } finally {
+                    Arrays.fill(ciphertextAndTag, (byte) 0);
+                }
+
+                recordIndex++;
+            }
+
+            out.flush();
+        } finally {
+            Arrays.fill(salt, (byte) 0);
+            Arrays.fill(streamIv, (byte) 0);
+            Arrays.fill(transferBuffer, (byte) 0);
+            Arrays.fill(recordIv, (byte) 0);
+        }
+    }
+
+    /**
+     * Decrypts a stream envelope produced by {@link #encrypt(InputStream, OutputStream, char[])}.
+     *
+     * <p>Envelope layout:
+     * {@code salt(16) || streamIv(12) || record( length(4) || ciphertext || tag(16) )* }.
+     *
+     * <p>Each record authenticates independently before plaintext bytes are released to {@code out}.
+     *
+     * @param in encrypted envelope source stream
+     * @param out plaintext destination stream
+     * @param passphrase passphrase used for key derivation
+     * @throws IOException if stream I/O fails
+     * @throws GeneralSecurityException if authentication fails or decryption cannot complete
+     * @throws IllegalArgumentException if stream references/header bytes are invalid
+     */
+    public void decrypt(InputStream in, OutputStream out, char[] passphrase)
+            throws IOException, GeneralSecurityException {
+        if (in == null) {
+            wipePassphrase(passphrase);
+            throw new IllegalArgumentException("input stream must not be null");
+        }
+        if (out == null) {
+            wipePassphrase(passphrase);
+            throw new IllegalArgumentException("output stream must not be null");
+        }
+
+        byte[] salt = new byte[SALT_LENGTH_BYTES];
+        byte[] streamIv = new byte[GCM_IV_LENGTH_BYTES];
+        if (!readFully(in, salt) || !readFully(in, streamIv)) {
+            wipePassphrase(passphrase);
+            Arrays.fill(salt, (byte) 0);
+            Arrays.fill(streamIv, (byte) 0);
+            throw new IllegalArgumentException("input stream does not contain a full envelope header");
+        }
+
+        byte[] recordCiphertext = new byte[STREAM_RECORD_MAX_PLAINTEXT_BYTES + GCM_TAG_LENGTH_BYTES];
+        byte[] recordIv = new byte[GCM_IV_LENGTH_BYTES];
+        long recordIndex = 0;
+        try {
+            SecretKey key = deriveKey(passphrase, salt);
+            Cipher cipher = Cipher.getInstance(CIPHER_TRANSFORMATION);
+
+            while (true) {
+                int recordPlaintextLength = readRecordLength(in);
+                if (recordPlaintextLength == -1) {
+                    break;
+                }
+                if (recordPlaintextLength <= 0
+                        || recordPlaintextLength > STREAM_RECORD_MAX_PLAINTEXT_BYTES) {
+                    throw new IllegalArgumentException("input stream contains invalid record length");
+                }
+                if (recordIndex >= MAX_STREAM_RECORDS) {
+                    throw new IllegalArgumentException(
+                            "input stream exceeds maximum supported record count");
+                }
+
+                int recordCiphertextLength = recordPlaintextLength + GCM_TAG_LENGTH_BYTES;
+                if (!readFully(in, recordCiphertext, 0, recordCiphertextLength)) {
+                    throw new IllegalArgumentException("input stream ended mid-record");
+                }
+
+                fillRecordIv(streamIv, recordIndex, recordIv);
+                cipher.init(Cipher.DECRYPT_MODE, key, new GCMParameterSpec(GCM_TAG_LENGTH_BITS, recordIv));
+                byte[] plaintextChunk = cipher.doFinal(recordCiphertext, 0, recordCiphertextLength);
+                try {
+                    if (plaintextChunk.length != recordPlaintextLength) {
+                        throw new GeneralSecurityException("decrypted record length mismatch");
+                    }
+                    out.write(plaintextChunk);
+                } finally {
+                    Arrays.fill(plaintextChunk, (byte) 0);
+                }
+
+                recordIndex++;
+            }
+            out.flush();
+        } finally {
+            Arrays.fill(salt, (byte) 0);
+            Arrays.fill(streamIv, (byte) 0);
+            Arrays.fill(recordCiphertext, (byte) 0);
+            Arrays.fill(recordIv, (byte) 0);
+        }
+    }
+
     private static byte[] randomBytes(int length) {
         byte[] bytes = new byte[length];
         SECURE_RANDOM.nextBytes(bytes);
         return bytes;
+    }
+
+    private static boolean readFully(InputStream in, byte[] target) throws IOException {
+        return readFully(in, target, 0, target.length);
+    }
+
+    private static boolean readFully(InputStream in, byte[] target, int offset, int length)
+            throws IOException {
+        int cursor = offset;
+        int end = offset + length;
+        while (cursor < end) {
+            int read = in.read(target, cursor, end - cursor);
+            if (read == -1) {
+                return false;
+            }
+            cursor += read;
+        }
+        return true;
+    }
+
+    private static void writeInt(OutputStream out, int value) throws IOException {
+        out.write((value >>> 24) & 0xff);
+        out.write((value >>> 16) & 0xff);
+        out.write((value >>> 8) & 0xff);
+        out.write(value & 0xff);
+    }
+
+    private static int readRecordLength(InputStream in) throws IOException {
+        int b0 = in.read();
+        if (b0 == -1) {
+            return -1;
+        }
+        int b1 = in.read();
+        int b2 = in.read();
+        int b3 = in.read();
+        if ((b1 | b2 | b3) < 0) {
+            throw new IllegalArgumentException("input stream ended while reading record length");
+        }
+        return (b0 << 24) | (b1 << 16) | (b2 << 8) | b3;
+    }
+
+    private static void fillRecordIv(byte[] streamIv, long recordIndex, byte[] targetIv) {
+        if (recordIndex < 0 || recordIndex >= MAX_STREAM_RECORDS) {
+            throw new IllegalArgumentException("record index is outside supported range");
+        }
+        if (targetIv.length != GCM_IV_LENGTH_BYTES) {
+            throw new IllegalArgumentException("target IV must be 12 bytes");
+        }
+        System.arraycopy(streamIv, 0, targetIv, 0, GCM_IV_LENGTH_BYTES);
+
+        long carry = recordIndex;
+        for (int i = GCM_IV_LENGTH_BYTES - 1; i >= 0 && carry != 0; i--) {
+            long sum = (targetIv[i] & 0xffL) + (carry & 0xffL);
+            targetIv[i] = (byte) sum;
+            carry = (carry >>> 8) + (sum >>> 8);
+        }
+        if (carry != 0) {
+            throw new IllegalArgumentException("record IV overflow");
+        }
     }
 
     private static void wipePassphrase(char[] passphrase) {
