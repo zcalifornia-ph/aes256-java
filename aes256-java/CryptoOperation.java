@@ -1,10 +1,10 @@
 import java.util.Arrays;
 
 /**
- * Abstract base type for the Unit-02 OOP abstraction layer.
+ * Abstract base type for cipher operations that manages a passphrase lifecycle.
  *
- * <p>This class establishes encapsulation and inheritance seams for Unit-02 and provides a
- * passphrase lifecycle that can be consumed and cleared per operation.
+ * <p>Provides encapsulation for the passphrase so that it can be consumed and cleared
+ * per operation.
  */
 public abstract class CryptoOperation {
 

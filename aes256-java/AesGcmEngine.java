@@ -14,11 +14,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Core cryptographic primitives for AES-256/GCM operations.
- *
- * <p>BOLT-1.1 introduces deterministic PBKDF2 key derivation using a supplied salt.
- * BOLT-1.2 introduces byte-array encrypt/decrypt operations using AES/GCM envelopes.
- * BOLT-1.3 introduces stream encrypt/decrypt operations using chunked AEAD records with a
- * fixed 64 KiB transfer buffer.
  */
 public final class AesGcmEngine {
 

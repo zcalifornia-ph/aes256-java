@@ -13,8 +13,8 @@ import java.util.Arrays;
 /**
  * File-oriented crypto facade.
  *
- * <p>This class maps file operations to Unit-01 stream encrypt/decrypt APIs while applying
- * filename policies from the requirements contract.
+ * <p>Wraps stream encrypt/decrypt operations from {@link AesGcmEngine} and applies
+ * default filename conventions for encrypted and decrypted output paths.
  */
 public final class FileCipher extends CryptoOperation {
 

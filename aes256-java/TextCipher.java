@@ -6,8 +6,8 @@ import java.util.Base64;
 /**
  * Text-oriented crypto facade.
  *
- * <p>This class maps UTF-8 text payloads to the Unit-01 byte-array envelope via
- * {@link AesGcmEngine}.
+ * <p>Encodes plaintext as UTF-8 bytes and delegates to {@link AesGcmEngine} for
+ * AES-256/GCM encryption, returning Base64-encoded ciphertext envelopes.
  */
 public final class TextCipher extends CryptoOperation {
 

@@ -16,9 +16,12 @@ import java.util.Locale;
 import java.util.Scanner;
 import javax.crypto.AEADBadTagException;
 
+/**
+ * Interactive CLI entrypoint for aes256-java.
+ */
+
 /*
- * OOP CONCEPT MAP (canonical: ai-dlc-docs/design-artifacts/OOP-CONCEPT-MAP.md)
- * Source: oop-notes/java-oop.txt
+ * OOP CONCEPT MAP
  * Encapsulation -> CryptoOperation#passphrase with getPassphrase(), setPassphrase(char[]),
  *   consumePassphrase(), clearStoredPassphrase().
  * Inheritance -> TextCipher extends CryptoOperation; FileCipher extends CryptoOperation.
@@ -27,12 +30,7 @@ import javax.crypto.AEADBadTagException;
  * Method Overriding -> TextCipher#describe() and FileCipher#describe()
  *   override CryptoOperation#describe().
  */
-/**
- * Interactive CLI entrypoint for aes256-java.
- *
- * <p>BOLT-3.2 wires menu actions to {@link TextCipher} and {@link FileCipher}
- * with friendly error mapping and passphrase prompting behavior.
- */
+
 public final class Main {
 
     private static final String CLI_LOGO =
